@@ -1,0 +1,68 @@
+.span_text {
+    text-align: left;
+    background: #f1f1f1;
+    padding: 10px 20px;
+}
+.materialdesign .header-top-area, .materialdesign .fixed-header-top {
+    /* background: linear-gradient(to right, #fff366 0%, #ffc966 100%); */
+    background: linear-gradient(to right, #fcb040 0%, #ffc966 100%);
+}
+
+
+.income-range .income-percentange {
+    font-size: 26px;
+    color: #fff;
+    float: right;
+    font-weight: bold;
+}
+.income-dashone-pro {
+    width: 87px;
+    height: 80px;
+    /* background-color: #ffc966; */
+}
+
+
+.materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li a:hover, .materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li a:focus, .materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li a:active, .materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li a:visited {
+    background: #fdba3e;
+}
+.custom-datatable-overright .form-control, .custom-datatable-overright .btn {
+    border-radius: 28px;
+}
+.col-lg-2.submit {
+    margin-top: 33px;
+}
+th.next {
+    background: url(https://image.flaticon.com/icons/svg/60/60758.svg) no-repeat center / 12px !important;
+}
+th.prev {
+    background: url(https://image.flaticon.com/icons/svg/60/60758.svg) no-repeat center / 12px !important;
+        transform: rotate(180deg);
+}
+#chartdiv {
+    width: 150% !important;
+    height: 400px !important;
+    margin-left: -50px !important;
+}
+
+
+table {
+   width: 100% !important;
+   border: 1px solid #dddddd;
+  
+    /* max-width: 100%; */
+    /* margin-bottom: 20px; */
+}
+td{
+    border-left: 1px solid #dddddd;
+   border-right: 1px solid #dddddd; 
+    border-bottom: 1px solid #dddddd;
+    padding: 8px;
+    line-height: 24px;
+}
+th{
+    border-left: 1px solid #dddddd;
+   border-right: 1px solid #dddddd; 
+    border-bottom: 1px solid #dddddd;
+    padding: 8px;
+    line-height: 24px;
+}

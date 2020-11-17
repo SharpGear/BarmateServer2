@@ -1,0 +1,285 @@
+<style media="screen">
+	#sidebar .sidebar-header {
+		padding: 0px !important;
+		background: #393939;
+	}
+</style>
+<div class="left-sidebar-pro">
+	<nav id="sidebar">
+		<div class="sidebar-header">
+
+
+
+			<a href="/dashboard"><img src="./img/logo/fav.png" alt="" />
+			</a>
+
+			<!-- <p>Developer</p> -->
+
+		</div>
+		<div class="left-custom-menu-adp-wrap">
+			<ul class="nav navbar-nav left-sidebar-menu-pro">
+				<li class="nav-item <% if(title=='dashboard'){ %> active <% }%>">
+					<a href="/dashboard" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>
+						<span class="mini-dn">Dashboard</span></a>
+				</li>
+				<li class="nav-item <% if(title=='users'){ %> active <% }%>">
+					<a href="/users_list" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-users"></i>
+						<span class="mini-dn">Users</span></a>
+				</li>
+				<li class="nav-item <% if(title=='category'){ %> active <% }%>">
+					<a href="/category_view" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-list-alt"></i>
+						<span class="mini-dn">Category</span></a>
+				</li>
+				<li class="nav-item <% if(title=='subcategory'){ %> active <% }%>">
+					<a href="/subcate_list" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-beer"></i>
+						<span class="mini-dn">SubCategory</span></a>
+				</li>
+				<li class="nav-item <% if(title=='venue'){ %> active <% }%>">
+					<a href="/vanue" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-building"></i>
+
+						<span class="mini-dn">Venues</span></a>
+				</li>
+				<li class="nav-item <% if(title=='product'){ %> active <% }%>">
+					<a href="/product_view" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-square"></i>
+						<span class="mini-dn">Products</span></a>
+				</li>
+				<li class="nav-item <% if(title=='brand'){ %> active <% }%>">
+					<a href="/brands" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-square"></i>
+						<span class="mini-dn">Brands</span></a>
+				</li>
+				<li class="nav-item <% if(title=='order'){ %> active <% }%>">
+					<a href="/order" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-bars"></i>
+						<span class="mini-dn">Orders</span></a>
+				</li>
+				<li class="nav-item <% if(title=='sales_data'){ %> active <% }%>">
+					<a href="/sales_venues" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-bars"></i>
+						<span class="mini-dn">Sales Data</span></a>
+				</li>
+				<!-- <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i
+						 class="fa big-icon fa-cubes"></i> <span class="mini-dn">Orders</span> <span class="indicator-right-menu mini-dn"><i
+							 class="fa indicator-mn fa-angle-left"></i></span></a>
+					<div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+						<a href="/order" class="dropdown-item">User Orders</a>
+						<a href="/vanueOrders" class="dropdown-item">Vanues Orders</a>
+					</div>
+				</li> -->
+				<!-- <li class="nav-item">
+					<a href="/vanue_order" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-file"></i>
+						<span class="mini-dn">Vanue Order</span></a>
+					</li> -->
+				<li class="nav-item <% if(title=='payment'){ %> active <% }%>"><a href="#" data-toggle="dropdown" role="button"
+					 aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-money"></i> <span class="mini-dn">Payments</span>
+						<span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+					<div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+						<a href="/user_payments" class="dropdown-item" style="color: #303030 !important;">User Payments</a>
+						<a href="/vanuePayments_list" class="dropdown-item" style="color: #303030 !important;">Venue Payments</a>
+					</div>
+				</li>
+				<li class="nav-item <% if(title=='terminal'){ %> active <% }%>">
+					<a href="/terminal" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-location-arrow"></i>
+
+						<span class="mini-dn">Terminals</span></a>
+				</li>
+				<li class="nav-item <% if(title=='advertisement'){ %> active <% }%>">
+					<a href="/advertisement" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-bullhorn" aria-hidden="true"></i>
+
+
+						<span class="mini-dn">Advertisement</span></a>
+				</li>
+				<li class="nav-item <% if(title=='report'){ %> active <% }%>">
+					<a href="/reports" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-ban" aria-hidden="true"></i>
+					</i>
+
+
+						<span class="mini-dn">Report</span></a>
+				</li>
+				<li class="nav-item <% if(title=='Reviews'){ %> active <% }%>">
+					<a href="/Reviews" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-comments" aria-hidden="true"></i>
+
+						<span class="mini-dn">Reviews</span></a>
+				</li>
+				<li class="nav-item <% if(title=='pages'){ %> active <% }%>">
+					<a href="/pages" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-file-o" aria-hidden="true"></i>
+
+						<span class="mini-dn">Pages</span></a>
+				</li>
+
+				<!-- <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-cubes"></i> <span class="mini-dn">Orders</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+			<div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+				<a href="/order" class="dropdown-item">All Orders</a>
+				<a href="/processing/1" class="dropdown-item">Processing</a>
+				<a href="/completed_orders/2" class="dropdown-item">Completed</a>
+				<a href="/canceled_orders/3" class="dropdown-item">Canceled</a>                                
+			</div>
+		</li> -->
+				<!-- <li class="nav-item">
+					<a href="/settings" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-cog"></i>
+						<span class="mini-dn">Settings</span></a>
+				</li> -->
+
+			</ul>
+		</div>
+	</nav>
+</div>
+<!-- Mobile Menu start -->
+<!-- <div class="mobile-menu-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="mobile-menu">
+					<nav id="dropdown">
+						<ul class="mobile-menu-nav">
+							<li><a data-toggle="collapse" data-target="#Charts" href="#">Home <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul class="collapse dropdown-header-top">
+									<li><a href="dashboard.html">Dashboard v.1</a>
+									</li>
+									<li><a href="dashboard-2.html">Dashboard v.2</a>
+									</li>
+									<li><a href="analytics.html">Analytics</a>
+									</li>
+									<li><a href="widgets.html">Widgets</a>
+									</li>
+								</ul>
+							</li>
+							<li><a data-toggle="collapse" data-target="#demo" href="#">Mailbox <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul id="demo" class="collapse dropdown-header-top">
+									<li><a href="inbox.html">Inbox</a>
+									</li>
+									<li><a href="view-mail.html">View Mail</a>
+									</li>
+									<li><a href="compose-mail.html">Compose Mail</a>
+									</li>
+								</ul>
+							</li>
+							<li><a data-toggle="collapse" data-target="#others" href="#">Miscellaneous <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul id="others" class="collapse dropdown-header-top">
+									<li><a href="profile.html">Profile</a>
+									</li>
+									<li><a href="contact-client.html">Contact Client</a>
+									</li>
+									<li><a href="contact-client-v.1.html">Contact Client v.1</a>
+									</li>
+									<li><a href="project-list.html">Project List</a>
+									</li>
+									<li><a href="project-details.html">Project Details</a>
+									</li>
+								</ul>
+							</li>
+							<li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Interface <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul id="Miscellaneousmob" class="collapse dropdown-header-top">
+									<li><a href="google-map.html">Google Map</a>
+									</li>
+									<li><a href="data-maps.html">Data Maps</a>
+									</li>
+									<li><a href="pdf-viewer.html">Pdf Viewer</a>
+									</li>
+									<li><a href="x-editable.html">X-Editable</a>
+									</li>
+									<li><a href="code-editor.html">Code Editor</a>
+									</li>
+									<li><a href="tree-view.html">Tree View</a>
+									</li>
+									<li><a href="preloader.html">Preloader</a>
+									</li>
+									<li><a href="images-cropper.html">Images Cropper</a>
+									</li>
+								</ul>
+							</li>
+							<li><a data-toggle="collapse" data-target="#Chartsmob" href="#">Charts <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul id="Chartsmob" class="collapse dropdown-header-top">
+									<li><a href="bar-charts.html">Bar Charts</a>
+									</li>
+									<li><a href="line-charts.html">Line Charts</a>
+									</li>
+									<li><a href="area-charts.html">Area Charts</a>
+									</li>
+									<li><a href="rounded-chart.html">Rounded Charts</a>
+									</li>
+									<li><a href="c3.html">C3 Charts</a>
+									</li>
+									<li><a href="sparkline.html">Sparkline Charts</a>
+									</li>
+									<li><a href="peity.html">Peity Charts</a>
+									</li>
+								</ul>
+							</li>
+							<li><a data-toggle="collapse" data-target="#Tablesmob" href="#">Tables <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul id="Tablesmob" class="collapse dropdown-header-top">
+									<li><a href="static-table.html">Static Table</a>
+									</li>
+									<li><a href="data-table.html">Data Table</a>
+									</li>
+								</ul>
+							</li>
+							<li><a data-toggle="collapse" data-target="#formsmob" href="#">Forms <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul id="formsmob" class="collapse dropdown-header-top">
+									<li><a href="basic-form-element.html">Basic Form Elements</a>
+									</li>
+									<li><a href="advance-form-element.html">Advanced Form Elements</a>
+									</li>
+									<li><a href="password-meter.html">Password Meter</a>
+									</li>
+									<li><a href="multi-upload.html">Multi Upload</a>
+									</li>
+									<li><a href="tinymc.html">Text Editor</a>
+									</li>
+									<li><a href="dual-list-box.html">Dual List Box</a>
+									</li>
+								</ul>
+							</li>
+							<li><a data-toggle="collapse" data-target="#Appviewsmob" href="#">App views <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul id="Appviewsmob" class="collapse dropdown-header-top">
+									<li><a href="basic-form-element.html">Basic Form Elements</a>
+									</li>
+									<li><a href="advance-form-element.html">Advanced Form Elements</a>
+									</li>
+									<li><a href="password-meter.html">Password Meter</a>
+									</li>
+									<li><a href="multi-upload.html">Multi Upload</a>
+									</li>
+									<li><a href="tinymc.html">Text Editor</a>
+									</li>
+									<li><a href="dual-list-box.html">Dual List Box</a>
+									</li>
+								</ul>
+							</li>
+							<li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+								<ul id="Pagemob" class="collapse dropdown-header-top">
+									<li><a href="login.html">Login</a>
+									</li>
+									<li><a href="register.html">Register</a>
+									</li>
+									<li><a href="captcha.html">Captcha</a>
+									</li>
+									<li><a href="checkout.html">Checkout</a>
+									</li>
+									<li><a href="contact.html">Contacts</a>
+									</li>
+									<li><a href="review.html">Review</a>
+									</li>
+									<li><a href="order.html">Order</a>
+									</li>
+									<li><a href="comment.html">Comment</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+<!-- Mobile Menu end -->
+<style>
+.left-custom-menu-adp-wrap {
+    height: 100%;
+    overflow: auto;
+}
+
+.left-custom-menu-adp-wrap ul.left-sidebar-menu-pro {
+    width: 100%;
+    height: 86%;
+    overflow: auto;
+}
+</style>

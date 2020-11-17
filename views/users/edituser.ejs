@@ -1,0 +1,216 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+
+
+
+<!-- Basic Form Start -->
+<div class="basic-form-area mg-b-15">
+  <div class="container-fluid">
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline12-list shadow-reset mg-t-30">
+          <div class="sparkline12-hd">
+            <div class="main-sparkline12-hd">
+              <h1>Edit User</h1>
+              <div class="sparkline8-outline-icon">
+
+                <!-- <span class="btn btn-white btn-xs" id="forgot_password" rel="<%= response.dataValues.id%>"><i
+                                        class="fa fa-key" aria-hidden="true"></i>
+                                    Reset
+                                    password</span> -->
+                <!-- <span class="btn btn-white btn-xs forgot_password" rel="<%=response.dataValues.id%>">Forgot
+                                    password</span> -->
+              </div>
+              <!-- <div class="sparkline12-outline-icon">
+                                <span class="sparkline12-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline12-collapse-close"><i class="fa fa-times"></i></span>
+                            </div> -->
+            </div>
+          </div>
+
+          <div class="sparkline12-graph">
+            <div class="basic-login-form-ad">
+              <div class="row">
+
+                <div class="col-lg-12">
+
+                  <div class="all-form-element-inner">
+                    <form action="/update_user" class="adminpro-form" method="post" encType="multipart/form-data">
+                      <input type="hidden" name="id" value="<%=response.dataValues.id%>">
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <input type="hidden" id="check_id" value="0">
+                            <input type="hidden" id="check_model" value="User">
+
+                            <label class="login2 pull-right pull-right-pro">Name</label>
+                          </div>
+                          <div class="col-lg-9">
+                            <input type="text" class="form-control" name="name" value="<%=response.dataValues.name%>">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <label class="login2 pull-right pull-right-pro">Email</label>
+                          </div>
+                          <div class="col-lg-9">
+                            <input type="email" class="form-control" name="email"
+                              value="<%=response.dataValues.email%>" disabled>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <label class="login2 pull-right pull-right-pro">Password</label>
+                          </div>
+                          <div class="col-lg-9">
+                            <input type="password" class="form-control" name="password" value="">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <label class="login2 pull-right pull-right-pro">Date of Birth</label>
+                          </div>
+                          <div class="col-lg-9">
+                            <input type="text" class="form-control date" name="dob"
+                              value="<%=response.dataValues.dob%>">
+                          </div>
+                        </div>
+                      </div>
+                     <!--  <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <label class="login2 pull-right pull-right-pro">Image</label>
+                          </div>
+                          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="file-upload-inner ts-forms">
+                              <div class="input prepend-big-btn">
+                                <label class="icon-right" for="prepend-big-btn">
+                                  <i class="fa fa-download"></i>
+                                </label>
+                                <div class="file-button">
+                                  Browse
+                                  <input type="file" name="image" value=""
+                                    onchange="readURL(this);">
+                                </div>
+
+                                <input type="text" disabled class="filess" id="prepend-big-btn"
+                                  placeholder="no file selected">
+
+                              </div>
+                            </div>
+
+                            <img class="margn" src=""
+                              style="margin-top: 10px; margin-right: 601px; height:150px;width:150px; " id="blah"
+                              src="#" alt="" />
+
+                            <img class="margn" style="margin-top: 10px; margin-right: 601px;" id="blah" src="#"
+                              alt="" />
+
+
+                          </div>
+                        </div>
+                      </div> -->
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <label class="login2 pull-right pull-right-pro">Image</label>
+                          </div>
+                          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="file-upload-inner ts-forms">
+                              <div class="input prepend-big-btn">
+                                <label class="icon-right" for="prepend-big-btn">
+                                  <i class="fa fa-download"></i>
+                                </label>
+                                <div class="file-button">
+                                  Browse
+                                  <!-- <input type="file" name="image" onchange="readURL(this);"> -->
+                                                                  <input type="file" name="image" id="image" onchange="readURL(this);" <%
+                                    if(response.dataValues.image ||response.dataValues.image!='' ){ %>
+                                  <%}else{%> required
+                                  <% }%>/>
+                                </div>
+                                <input type="text" disabled id="prepend-big-btn" class="filess"
+                                  placeholder="no file selected">
+                                  
+                              </div>
+                            </div>
+
+                            <img class="margn" style="margin-top: 10px; margin-right: 652px; width:100px;height:100px;" id="blah" src="<%=response.dataValues.image %>"  />
+
+                           <!--  <img class="margn" style="margin-top: 10px; margin-right: 601px;"
+                              id="blah" src="#" alt="" /> -->
+
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group-inner">
+                        <div class="login-btn-inner">
+                          <div class="row">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
+                              <div class="login-horizental cancel-wp pull-left">
+                                <button class="btn btn-white" type="reset"><a href="/users_list">Cancel</a></button>
+                                <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save
+                                  Change</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Basic Form End-->
+
+
+<% include ../partials/footer.ejs %>
+<script>
+  $(document).on('click', '#forgot_password', function () {
+    let _this = $(this);
+    let _id = _this.attr('rel');
+    $.ajax({
+      type: "post",
+      url: "/reset_password_user",
+      data: { id: _id },
+      cache: false,
+      success: function (html) {
+        console.log(html); return false;
+        /* if (html.done == 1) {
+            if (html.status == '1') {
+                _this.removeClass(".label label-success");
+                _this.addClass(".label label-danger");
+                _this.text('Inactive');
+                _this.attr('value', '1');
+            } else {
+                _this.removeClass(".label label-danger");
+                _this.addClass(".label label-success");
+                _this.text('Active');
+                _this.attr('value', '0');
+            }
+        } */
+      }
+    });
+  });
+
+</script>

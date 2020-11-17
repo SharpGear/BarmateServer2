@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.time {
+	margin: 0px;
+	padding: 4px;
+	width: 100%;
+	float: left;
+}
+.time_datls {
+	margin: 0px;
+	padding: 4px;
+	width: 100%;
+	float: left;
+	text-align: right;
+	line-height: 24px;
+}
+.time1 {
+	margin: 0px;
+	width: 100%;
+	float: left;
+	padding: 4px;
+	font-size: 13px;
+}	
+body {
+	font-family: arial;
+	color: #999;
+	box-sizing: border-box;
+	padding: 40px 15px;
+	width: 100%;
+	max-width: 600px;
+	margin: 0px auto;
+	display: inline-block;
+}
+.rc h3 {
+	color: #da6527;
+	margin: 5px 0px;
+	font-size: 31px;
+	width: 100%;
+	float: left;
+}.rc h5 {
+	color: #da6527;
+	margin: 5px 0px;
+	font-size: 16px;
+	font-weight: normal;
+	width: 100%;
+	float: left;
+}
+.rc h4 {
+	color: #da6527;
+	margin: 5px 0px;
+	font-size: 16px;
+	width: 100%;
+	float: left;
+	border-top: 1px solid #666;
+	border-bottom: 1px solid #666;
+	padding: 12px 0px;
+	font-weight: normal;
+}
+.rc h4 span {
+	float: right;
+}
+.rc h5 span {
+	float: right;
+	font-weight:bold;
+}
+.time span {
+	float: left;
+	margin-right: 30px;
+}
+.rc h3 img {
+	float: right;
+	width: 50px;
+}
+.price {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	float: left;
+	line-height: 24px;
+}
+.price span {
+	float: right;
+}
+.line {
+	float: left;
+	width: 100%;
+	height: 1px;
+	background: #333;
+	margin: 8px 0px;
+}
+</style>
+</head>
+
+<body class="rc">
+<p class="time"><%= response.time %> <span> <%= response.header_date %></span>   </p>
+<h3> <%= response.venue_name %> <!-- <img src="user4.png" > --></h3> 
+<p class="time1">Phone: <%= response.phone %>   </p>
+<p class="time1">Fax: <%= response.fax %></p>
+<p class="time1">ABN: <%= response.ABN %>   </p>
+<p class="time1">Reciept#: <%= response.receipt_no %>   </p>
+<h5 style="font-size:23px;"><%= response.main_category_name %></h5>
+<% if(response.is_all){ %>
+  
+<h4><%= response.terminal_name %> <small style="color:#999;"> (Combined)</small>  <span>  <%= response.date %></span> </h4>
+
+<% } else{ %>
+  <h4><%= response.terminal_name %>  <span>  <%= response.date %></span> </h4>
+<%  } %>  
+<% response.data.forEach((product)=>{ %>
+
+  <h5><%= product.category.name %>   <span> <%= product.quantity_total %></span> </h5>
+
+  <% product.Product.forEach((item)=>{ %>
+  <p class="price"><%= item.product.name %> (<%= item.product.quantity %>) $<%= item.product.price %> <span> <%= item.quantity_total %></span>   </p>
+  
+  
+
+  <%  }) %>  <div class="line "> </div> <% })%>
+
+
+<h5><%= response.item_type %>  <span> <%= response.total[0].total_product %></span> </h5>
+<h5>Price Total  <span> $<%= response.total[0].total_amount %></span> </h5>
+
+</body>
+</html>

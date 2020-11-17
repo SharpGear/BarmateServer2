@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "dbuser",
+    "password": "Mybdj!@3123%*&7",
+    "database": "barmate",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "cqlsysnew",
+    "password": "SYstme123@@",
+    "database": "barmate",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "dbuser",
+    "password": "cqlsys123",
+    "database": "barmate",
+    "host": "localhost",
+    "dialect": "mysql"
+  
+   
+  
+  }
+}
+

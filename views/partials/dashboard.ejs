@@ -1,0 +1,962 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<link rel="stylesheet" href="css/datapicker/datepicker3.css">
+
+
+<!-- Styles -->
+<style>
+  #chartdiv {
+    width: 200%;
+    height: 400px;
+    margin-left: -150px;
+  }
+
+  #chartdivuser {
+    width: 100%;
+    height: 200px;
+    /* margin-left: -150px; */
+  }
+
+  #chartdivvenue {
+    width: 100%;
+    height: 200px;
+    /* margin-left: -150px; */
+  }
+</style>
+
+
+<br>
+<!-- income order visit user Start -->
+<div class="income-order-visit-user-area">
+  <div class="container-fluid">
+    <div class="row">
+      <a href="/users_list">
+        <div class="col-lg-3">
+          <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+            <div class="income-title">
+              <div class="main-income-head">
+                <h2>Total Users</h2>
+
+              </div>
+            </div>
+            <div class="income-dashone-pro">
+              <div class="income-rate-total">
+                <div class="price-adminpro-rate">
+                  <h3><span></span><span class="counter"></span></h3>
+                </div>
+                <div class="price-graph">
+                  <span id="sparkline1"></span>
+                </div>
+              </div>
+              <div class="income-range">
+                <span class="income-percentange">
+                  <%=response.users%>
+                </span>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/vanue">
+        <div class="col-lg-3">
+          <div class="income-dashone-total visitor-monthly shadow-reset nt-mg-b-30">
+            <div class="income-title">
+              <div class="main-income-head">
+                <h2>Venue</h2>
+                <div class="main-income-phara visitor-cl">
+                </div>
+              </div>
+            </div>
+            <div class="income-dashone-pro">
+              <div class="income-rate-total">
+                <div class="price-adminpro-rate">
+                </div>
+                <div class="price-graph">
+                  <span id="sparkline2"></span>
+                </div>
+              </div>
+              <div class="income-range visitor-cl">
+                <span class="income-percentange">
+                  <%=response.venues%></i>
+                </span>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/user_payments">
+        <div class="col-lg-3">
+          <div class="income-dashone-total user-monthly shadow-reset nt-mg-b-30">
+            <div class="income-title">
+              <div class="main-income-head">
+                <h2>User Payments</h2>
+                <div class="main-income-phara low-value-cl">
+                </div>
+              </div>
+            </div>
+            <div class="income-dashone-pro">
+              <div class="income-rate-total">
+                <div class="price-adminpro-rate">
+                </div>
+                <div class="price-graph">
+                  <span id="sparkline5"></span>
+                </div>
+              </div>
+              <div class="income-range low-value-cl">
+                <span class="income-percentange">
+                  <%=response.userPayments%></i></span>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/order">
+        <div class="col-lg-3">
+          <div class="income-dashone-total user-monthly shadow-reset nt-mg-b-30">
+            <div class="income-title">
+              <div class="main-income-head">
+                <h2>Orders</h2>
+                <div class="main-income-phara low-value-cl">
+                </div>
+              </div>
+            </div>
+            <div class="income-dashone-pro">
+              <div class="income-rate-total">
+                <div class="price-adminpro-rate">
+                </div>
+                <div class="price-graph">
+                  <span id="sparkline5"></span>
+                </div>
+              </div>
+              <div class="income-range low-value-cl">
+                <span class="income-percentange">
+                  <%=response.orders_count%></i></span>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- <div class="charts-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="charts-single-pro shadow-reset nt-mg-b-30">
+                            <div class="alert-title">
+                                
+
+                            </div>
+                            <div id="bar1-chart">
+                                <canvas id="barchart1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    <div class="dashtwo-order-area">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="dashtwo-order-list shadow-reset">
+              <div class="row">
+                <div class="col-lg-9">
+                  <div class="wrapper">
+                    <h1>Admin Earnings</h1>
+                    <br>
+                    <form method="GET">
+                      <div class="row">
+                        <div class="col-md-8 form-group data-custon-pick data-custom-mg" id="data_5">
+                          <label>Range select</label>
+                          <div class="input-daterange input-group" id="datepicker">
+                            <input type="text" class="form-control" name="start_date" value="<%=response.start_date%>"
+                              autocomplete="off">
+                            <span class="input-group-addon">to</span>
+                            <input type="text" class="form-control" name="end_date" value="<%=response.end_date%>"
+                              autocomplete="off">
+                          </div>
+                        </div>
+                        <div class="col-md-4 login-horizental cancel-wp pull-left">
+                          <!-- <button class="btn btn-white" type="reset">Reset</button> -->
+                          <button class="btn btn-sm header-drl-controller-btn btn-info login-submit-cs"
+                            type="submit">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                    <br>
+                    <!-- <canvas id="myChartsrs" width="400" height="100"></canvas> -->
+                    <div id="chartdiv"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><br />
+    <div class="dashtwo-order-area">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="dashtwo-order-list shadow-reset">
+
+              <div class="row">
+                <div class="col-md-8 form-group data-custon-pick data-custom-mg" id="data_5">
+                  <label>Range select</label>
+                  <div class="input-daterange input-group" id="datepicker">
+                    <input type="text" class="form-control" id="start_date_bar" name="start_date_bar"
+                      value="<%=response.start_date_bar%>" autocomplete="off">
+                    <span class="input-group-addon">to</span>
+                    <input type="text" class="form-control" id="end_date_bar" name="end_date_bar"
+                      value="<%=response.end_date_bar%>" autocomplete="off">
+                  </div>
+                </div>
+                <div class="col-md-4 login-horizental cancel-wp pull-left">
+                  <!-- <button class="btn btn-white" type="reset">Reset</button> -->
+                  <button class="btn btn-sm header-drl-controller-btn btn-info login-submit-cs submit_bar_chart"
+                    type="button">Submit</button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="wrapper">
+                    <h1>Users</h1>
+                    <br>
+                    <canvas id="chartdivuser"></canvas>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="wrapper">
+                    <h1>Venues</h1>
+                    <br>
+                    <canvas id="chartdivvenue"></canvas>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><br />
+    <br />
+    <div class="transition-world-area">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="transition-world-list shadow-reset">
+              <div class="sparkline7-list">
+
+                <div class="sparkline7-graph">
+                  <div class="row">
+                    <!-- <div class="col-lg-6">
+                                            <h1>Latest Users</h1>
+                                            <div class="datatable-dashv1-list custom-datatable-overright dashtwo-project-list-data">
+
+                                                <table id="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="state" data-checkbox="true"></th>
+                                                            <th data-field="id">Name</th>
+                                                            <th data-field="method" data-editable="true">Email</th>
+                                                            <th data-field="date" data-editable="true">Date</th>
+                                                            
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%if(response.all_user_data && response.all_user_data!=''){
+                                                            for(let i in response.all_user_data){
+                                                                    console.log(response.all_user_data[i]);
+                                                                %>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td>
+                                                                <%=response.all_user_data[i].name%>
+                                                            </td>
+                                                            <td>
+                                                                <%=response.all_user_data[i].email%>
+                                                            </td>
+                                                            <td>
+                                                                <%=response.all_user_data[i].dob%>
+                                                            </td>
+                                                            
+ 
+                                                        </tr>
+                                                        <%}}%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> -->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                      <div class="contact-client-single ct-client-b-mg-30 ct-client-b-mg-30-n shadow-reset">
+                        <div class="row">
+                          <span><b style="font-size: 16px;">
+                              Latest Users</b></span>
+                          <div class="col-lg-8" style="    margin-left: 240px;
+                                                                                    margin-top: 0px;">
+
+                          </div>
+                          <div class="col-lg-12">
+                            <div class="sparkline8-list shadow-reset">
+
+                              <div class="sparkline8-graph">
+                                <div class="static-table-list">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>D.O.B</th>
+
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <%if(response.all_user_data && response.all_user_data!=''){
+                                                                                                                                        for(let i in response.all_user_data){
+                                                                                                                                                
+                                                                                                                                            %>
+                                      <tr>
+                                        <td>
+                                          <%=response.all_user_data[i].name%>
+                                        </td>
+                                        <td>
+                                          <%=response.all_user_data[i].email%>
+                                        </td>
+                                        <td>
+                                          <%=response.all_user_data[i].dob%>
+                                        </td>
+
+
+                                      </tr>
+                                      <%}}%>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <!-- <div class="col-lg-6">
+                                            <h1>Latest Orders</h1>
+                                            <div class="datatable-dashv1-list custom-datatable-overright dashtwo-project-list-data">
+
+                                                <table id="table">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th data-field="id">Vanue</th>
+                                                            <th data-field="method" data-editable="true">Username</th>
+                                                            <th data-field="date" data-editable="true">Total</th>
+                                                            <th data-field="country" data-editable="true">Round</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%if(response.latest_order_data && response.latest_order_data!=''){
+                                                        for(let i in response.latest_order_data){
+                                                        
+                                                        %>
+                                                        <tr>
+
+                                                            <td>
+                                                                <% if(response.latest_order_data[i].dataValues.venue && response.latest_order_data[i].dataValues.venue!='' && response.latest_order_data[i].dataValues.venue.dataValues.name && (response.latest_order_data[i].dataValues.venue.dataValues.name!='' || response.latest_order_data[i].dataValues.venue.dataValues.name != 'null')){%>
+                                                                <%=response.latest_order_data[i].dataValues.venue.dataValues.name%>
+                                                                <% }%>
+                                                            </td>
+                                                            <td>
+                                                                <% if(response.latest_order_data[i].dataValues.user && response.latest_order_data[i].dataValues.user!='' && response.latest_order_data[i].dataValues.user.dataValues.name && (response.latest_order_data[i].dataValues.user.dataValues.name!='' || response.latest_order_data[i].dataValues.user.dataValues.name != 'null')){%>
+                                                                <%=response.latest_order_data[i].dataValues.user.dataValues.name%>
+                                                                <% }%>
+                                                            </td>
+                                                            <td>
+                                                                <%=response.latest_order_data[i].total%>
+                                                            </td>
+                                                            <td>
+                                                                <%=response.latest_order_data[i].round%>
+                                                            </td>
+
+                                                        </tr>
+                                                        <%}}%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> -->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                      <div class="contact-client-single ct-client-b-mg-30 ct-client-b-mg-30-n shadow-reset">
+                        <div class="row">
+                          <span><b style="font-size: 16px;">
+                              Latest Orders</b></span>
+                          <div class="col-lg-8" style="    margin-left: 240px;
+                                            margin-top: 0px;">
+
+                          </div>
+                          <div class="col-lg-12">
+                            <div class="sparkline8-list shadow-reset">
+
+                              <div class="sparkline8-graph">
+                                <div class="static-table-list">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>Username</th>
+                                        <th>Venue</th>
+                                        <th>Total ($)</th>
+                                        <!-- <th>Round</th> -->
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <%if(response.latest_order_data && response.latest_order_data!=''){
+                                                                                                                                    for(let i in response.latest_order_data){
+                                                                                                                                    
+                                                                                                                                    %>
+                                      <tr>
+                                        <td>
+                                          <% if(response.latest_order_data[i].dataValues.userDetails && response.latest_order_data[i].dataValues.userDetails!='' && response.latest_order_data[i].dataValues.userDetails.dataValues.name && (response.latest_order_data[i].dataValues.userDetails.dataValues.name!='' || response.latest_order_data[i].dataValues.userDetails.dataValues.name != 'null')){%>
+                                          <%=response.latest_order_data[i].dataValues.userDetails.dataValues.name%>
+                                          <% }%>
+                                        </td>
+                                        <td>
+                                          <% if(response.latest_order_data[i].dataValues.venueDetail && response.latest_order_data[i].dataValues.venueDetail!='' && response.latest_order_data[i].dataValues.venueDetail.dataValues.name && (response.latest_order_data[i].dataValues.venueDetail.dataValues.name!='' || response.latest_order_data[i].dataValues.venueDetail.dataValues.name != 'null')){%>
+                                          <%=response.latest_order_data[i].dataValues.venueDetail.dataValues.name%>
+                                          <% }%>
+                                        </td>
+                                        <td>
+                                          <%=response.latest_order_data[i].total%>
+                                        </td>
+                                       <!--  <td>
+                                          <%=response.latest_order_data[i].round%>
+                                        </td> -->
+
+                                      </tr>
+                                      <%}}%>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- income order visit user End -->
+<!-- <div class="dashtwo-order-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="dashtwo-order-list shadow-reset">
+                    <div class="row">
+                        <div class="col-lg-9">
+                           <div class="wrapper">
+          <canvas id="myChartsrs" width="400" height="100"></canvas>
+        </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="skill-content-3">
+                                <div class="skill">
+                                    <div class="progress">
+                                        <div class="lead-content">
+                                            <h3>2,346</h3>
+                                            <p>Total orders in period</p>
+                                        </div>
+                                        <div class="progress-bar wow fadeInLeft" data-progress="95%" style="width: 95%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>95%</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="lead-content">
+                                            <h3>9,346</h3>
+                                            <p>Orders in last month</p>
+                                        </div>
+                                        <div class="progress-bar wow fadeInLeft" data-progress="85%" style="width: 85%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>85%</span> </div>
+                                    </div>
+                                    <div class="progress progress-bt">
+                                        <div class="lead-content">
+                                            <h3>2,34,600</h3>
+                                            <p>Monthly income from order</p>
+                                        </div>
+                                        <div class="progress-bar wow fadeInLeft" data-progress="93%" style="width: 93%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>93%</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<% include ../partials/footer.ejs %>
+
+<script>
+    // (function ($) {
+    //     "use strict";
+
+
+    //     var ctx = document.getElementById('myChartsrs').getContext("2d");
+    //     var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+    //     gradientStroke.addColorStop(0, '#80b6f4');
+
+    //     gradientStroke.addColorStop(1, '#f49080');
+    //     var myChartsrs = new Chart(ctx, {
+    //         type: 'line',
+    //         data: {
+    //             labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"],
+    //             datasets: [{
+    //                 label: "Users",
+    //                 borderColor: gradientStroke,
+    //                 pointBorderColor: gradientStroke,
+    //                 pointBackgroundColor: gradientStroke,
+    //                 pointHoverBackgroundColor: gradientStroke,
+    //                 pointHoverBorderColor: gradientStroke,
+    //                 pointBorderWidth: 10,
+    //                 pointHoverRadius: 10,
+    //                 pointHoverBorderWidth: 1,
+    //                 pointRadius: 3,
+    //                 fill: false,
+    //                 borderWidth: 4,
+    //                 data: ['<%=response.users_count_year[0]%>']
+    //             }]
+    //         },
+    //         options: {
+    //             legend: {
+    //                 position: "bottom"
+    //             },
+    //             scales: {
+    //                 yAxes: [{
+    //                     ticks: {
+    //                         fontColor: "rgba(0,0,0,0.5)",
+    //                         fontStyle: "bold",
+    //                         beginAtZero: true,
+    //                         maxTicksLimit: 5,
+    //                         padding: 20
+    //                     },
+    //                     gridLines: {
+    //                         drawTicks: false,
+    //                         display: false
+    //                     }
+    //                 }],
+    //                 xAxes: [{
+    //                     gridLines: {
+    //                         zeroLineColor: "transparent"
+    //                     },
+    //                     ticks: {
+    //                         padding: 20,
+    //                         fontColor: "rgba(0,0,0,0.5)",
+    //                         fontStyle: "bold"
+    //                     }
+    //                 }]
+    //             }
+    //         }
+    //     });
+
+
+
+    // })(jQuery);
+
+
+
+// <!-- 
+//     var chart = AmCharts.makeChart("chartdiv", {
+//     "type": "serial",
+//     "theme": "light",
+//     "marginRight": 40,
+//     "marginLeft": 40,
+//     "autoMarginOffset": 20,
+//     "mouseWheelZoomEnabled":true,
+//     "dataDateFormat": "YYYY-MM-DD",
+//     "valueAxes": [{
+//         "id": "v1",
+//         "axisAlpha": 0,
+//         "position": "left",
+//         "ignoreAxisWidth":true
+//     }],
+//     "balloon": {
+//         "borderThickness": 1,
+//         "shadowAlpha": 0
+//     },
+//     "graphs": [{
+//         "id": "g1",
+//         "balloon":{
+//           "drop":true,
+//           "adjustBorderColor":false,
+//           "color":"#ffffff"
+//         },
+//         "bullet": "round",
+//         "bulletBorderAlpha": 1,
+//         "bulletColor": "#FFFFFF",
+//         "bulletSize": 5,
+//         "hideBulletsCount": 50,
+//         "lineThickness": 2,
+//         "title": "red line",
+//         "useLineColorForBulletBorder": true,
+//         "valueField": "value",
+//         "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+//     }],
+//     "chartScrollbar": {
+//         "graph": "g1",
+//         "oppositeAxis":false,
+//         "offset":30,
+//         "scrollbarHeight": 80,
+//         "backgroundAlpha": 0,
+//         "selectedBackgroundAlpha": 0.1,
+//         "selectedBackgroundColor": "#888888",
+//         "graphFillAlpha": 0,
+//         "graphLineAlpha": 0.5,
+//         "selectedGraphFillAlpha": 0,
+//         "selectedGraphLineAlpha": 1,
+//         "autoGridCount":true,
+//         "color":"#AAAAAA"
+//     },
+//     "chartCursor": {
+//         "pan": true,
+//         "valueLineEnabled": true,
+//         "valueLineBalloonEnabled": true,
+//         "cursorAlpha":1,
+//         "cursorColor":"#258cbb",
+//         "limitToGraph":"g1",
+//         "valueLineAlpha":0.2,
+//         "valueZoomable":true
+//     },
+//     "valueScrollbar":{
+//       "oppositeAxis":false,
+//       "offset":50,
+//       "scrollbarHeight":10
+//     },
+//     "categoryField": "date",
+//     "categoryAxis": {
+//         "parseDates": true,
+//         "dashLength": 1,
+//         "minorGridEnabled": true
+//     },
+//     "export": {
+//         "enabled": true
+//     },
+//     "dataProvider": '[{"date":"2018-10-03","value":1},{"date":"2018-10-04","value":1},{"date":"2018-10-15","value":3}]'
+// }); -->
+
+
+
+
+
+</script>
+
+
+
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+<!-- Chart code -->
+<script>
+  // Themes begin
+  am4core.useTheme(am4themes_animated);
+  // Themes end
+
+  // Create chart instance
+  var chart = am4core.create("chartdiv", am4charts.XYChart);
+  chart.colors.list = [
+    am4core.color("#fdba3e"),
+  ];
+  // chart.color = "#fdba3e";
+  // char.fillColor =
+
+  // console.log(chart);
+  // Add data
+  //     chart.data = [ { date: '12/01/2018', value: 1 },
+  //   { date: '12/26/2018', value: 2 },
+  //   { date: '12/31/2018', value: 1 },
+  //   { date: '01/17/2019', value: 2 } ];
+  
+  var str = `<%= response.admin_earnings %>`;
+  //console.log(str);
+  // console.log(str);
+  str = str.split("&#34;").join('"')
+  str = JSON.parse(str);
+  console.log(str);
+  var mappedStr = str.map(obj => {
+    let date = new Date(obj.date);
+    date.setHours(12);
+    return { date: date, value: obj.value }
+  });
+  // console.log(mappedStr);
+
+  chartData = mappedStr;
+  chart.data = mappedStr;
+  // console.log(chart.data);
+  // Create axes
+  var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  valueAxis.title.text = "Admin Earnings";
+  valueAxis.title.fontSize = 20;
+  // valueAxis.parsingStepDuration = 1;
+  dateAxis.renderer.grid.template.disabled = true;
+  valueAxis.renderer.grid.template.disabled = true;
+  dateAxis.title.text = "Date";
+  dateAxis.title.fontSize = 20;
+  // Create series
+  var series = chart.series.push(new am4charts.LineSeries());
+  series.dataFields.valueY = "value";
+  series.dataFields.dateX = "date";
+  series.tooltipText = "Earnings ${value}"
+  series.strokeWidth = 2;
+  series.minBulletDistance = 15;
+
+
+  // Drop-shaped tooltips
+  // series.tooltip.background.fillColor = '999';
+  series.tooltip.background.cornerRadius = 20;
+  series.tooltip.background.strokeOpacity = 0;
+  series.tooltip.pointerOrientation = "vertical";
+  series.tooltip.label.minWidth = 40;
+  series.tooltip.label.minHeight = 40;
+  series.tooltip.label.textAlign = "middle";
+  series.tooltip.label.textValign = "middle";
+
+  // Create series
+  var lineSeries = chart.series.push(new am4charts.LineSeries());
+  lineSeries.dataFields.valueY = "value";
+  lineSeries.dataFields.dateX = "date";
+  lineSeries.name = "Sales";
+  lineSeries.strokeWidth = 3;
+  lineSeries.fillOpacity = 1;
+
+
+  var fillModifier = new am4core.LinearGradientModifier();
+  fillModifier.opacities = [1, 0];
+  fillModifier.offsets = [0, 1];
+  fillModifier.gradient.rotation = 90;
+  lineSeries.segments.template.fillModifier = fillModifier;
+
+
+  // Make bullets grow on hover
+  var bullet = series.bullets.push(new am4charts.CircleBullet());
+  bullet.circle.strokeWidth = 2;
+  bullet.circle.radius = 4;
+  bullet.circle.fill = am4core.color("#fff");
+
+  var bullethover = bullet.states.create("hover");
+  bullethover.properties.scale = 1.3;
+
+  // Make a panning cursor
+  chart.cursor = new am4charts.XYCursor();
+  chart.cursor.behavior = "panXY";
+  chart.cursor.xAxis = dateAxis;
+  chart.cursor.snapToSeries = series;
+
+  // Create vertical scrollbar and place it before the value axis
+  // chart.scrollbarY = new am4core.Scrollbar();
+  // chart.scrollbarY.parent = chart.leftAxesContainer;
+  // chart.scrollbarY.toBack();
+
+  // Create a horizontal scrollbar with previe and place it underneath the date axis
+  // chart.scrollbarX = new am4charts.XYChartScrollbar();
+  // chart.scrollbarX.series.push(series);
+  // chart.scrollbarX.parent = chart.bottomAxesContainer;
+
+  chart.events.on("ready", function () {
+    dateAxis.zoom({ start: 0, end: 1 });
+  });
+</script>
+
+
+<script src="js/datapicker/bootstrap-datepicker.js"></script>
+<script src="js/datapicker/datepicker-active.js"></script>
+
+
+
+<script>
+  $(document).ready(function () {
+
+
+    // ------------------ Registered Users Count ----------------------//
+    let ctx = document.getElementById('chartdivuser').getContext('2d');
+    window.chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: "Users Registered This Month",
+          backgroundColor: '#fdba3e',
+          borderColor: '#fdba3e',
+          data: [],
+          fill: false,
+          // scaleStartValue:0,
+          // scaleStepWidth:100
+        }],
+      },
+
+      options: {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 0,
+              stepSize: 1,
+              // stepValue: 1,
+              // max: 5 //max value for the chart is 60
+            }, gridLines: {
+              display: false
+            }
+
+          }],
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+
+          }]
+        }
+      }
+
+    });
+    $.ajax({
+      type: "GET",
+      url: "/users_chart_dashboard",
+      success: function (response) {
+        //console.log('ajax reached');
+        for (let i = 0; i < response.length; i++) {
+          window.chart.data.labels.push(response[i].date);
+          window.chart.data.datasets[0].data.push(response[i].total);
+          window.chart.update();
+        }
+      }, error(error) {
+        console.error(error);
+      }
+    });
+
+    $(document.body).on('click', '.submit_bar_chart', function () {
+      var start_date = $('#start_date_bar').val();
+      var end_date = $('#end_date_bar').val();
+      // console.log(start_date, end_date);
+
+      $.ajax({
+        type: "POST",
+        url: "/get_user_venue_bars_data",
+        data: {
+          start_date,
+          end_date
+        },
+        success: function (response) {
+         // console.log(response);
+          //console.log('ajax reached');
+          window.chart.data.datasets[0].data = [];
+          window.chart.data.labels = [];
+          window.chart2.data.datasets[0].data = [];
+          window.chart2.data.labels = [];
+
+          if (response.users) {
+            for (let i = 0; i < response.users.length; i++) {
+              window.chart.data.labels.push(response.users[i].date);
+              window.chart.data.datasets[0].data.push(response.users[i].total);
+              window.chart.update();
+            }
+          }
+
+          if (response.venues) {
+            for (let i = 0; i < response.venues.length; i++) {
+              window.chart2.data.labels.push(response.venues[i].date);
+              window.chart2.data.datasets[0].data.push(response.venues[i].total);
+              window.chart2.update();
+            }
+            
+          }
+        }, error(error) {
+          console.error(error);
+        }
+      });
+    });
+
+    // ------------------ Registered Users Count Ends Here ----------------------//
+
+
+    // ------------------ Registered Venues Count ----------------------//
+    let ctx2 = document.getElementById('chartdivvenue').getContext('2d');
+    window.chart2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: "Venues Registered This Month",
+          backgroundColor: '#fdba3e',
+          borderColor: '#fdba3e',
+          data: [],
+          fill: false,
+          // scaleStartValue:0,
+          // scaleStepWidth:100
+        }],
+      },
+
+      options: {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 0,
+              stepSize: 1,
+              // stepValue: 1,
+              // max: 5 //max value for the chart is 60
+            }, gridLines: {
+              display: false
+            }
+
+          }],
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+
+          }]
+        }
+      }
+
+    });
+    $.ajax({
+      type: "GET",
+      url: "/venues_chart_dashboard",
+      success: function (response) {
+        console.log('ajax reached');
+        // console.log(response);
+        for (let i = 0; i < response.length; i++) {
+          window.chart2.data.labels.push(response[i].date);
+          window.chart2.data.datasets[0].data.push(response[i].total);
+          window.chart2.update();
+        }
+      }, error(error) {
+        console.error(error);
+      }
+    });
+    // ------------------ Registered Venues Count Ends Here ----------------------//
+
+  });
+
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>

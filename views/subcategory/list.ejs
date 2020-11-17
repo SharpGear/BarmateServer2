@@ -1,0 +1,130 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+
+<br>
+
+<% if(msg && msg!=''){%>
+<div class="alert alert-success col-xs-8" id="msg">
+  <span>
+    <%=msg ? msg: ''%>
+  </span>
+</div>
+<% }%>
+
+<div class="admin-dashone-data-table-area mg-b-15">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline8-list shadow-reset">
+          <div class="sparkline8-hd">
+            <div class="main-sparkline8-hd">
+              <h1>Subcategory</h1>
+              <div class="sparkline8-outline-icon">
+                <!-- <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span> -->
+                <a href="/subcate" class="btn btn-white btn-xs">+ Add Subcategory</a>
+              </div>
+            </div>
+          </div>
+          <div class="sparkline8-graph">
+            <div class="datatable-dashv1-list custom-datatable-overright">
+              <div id="toolbar">
+                <!-- <select class="form-control">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select> -->
+              </div>
+              <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true"
+                data-show-pagination-switch="true" data-show-refresh="false" data-key-events="true"
+                data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId"
+                data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                <thead>
+                  <tr>
+                    <!-- <th data-field="state" data-checkbox="true"></th> -->
+                    <th data-field="ID">Sr. No.</th>
+                    <!-- <th>Venue</th> -->
+                    <th data-field="Name" data-editable="false">Name</th>
+                    <th data-field="Category_id" data-editable="false">Category</th>
+                    <th data-field="main_Category_id" data-editable="false">Main Category</th>
+                   <!--  <th data-field="image" data-editable="false">image</th> -->
+                    <!-- <th data-field="status" data-editable="false">status</th> -->
+                <%console.log(response[0].dataValues.category.dataValues.name);%>
+                    <th data-field="action">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% 
+                                    if(response && response.length>0){
+                                    for(var i in response){
+                                    %>
+                  <!-- <td></td> -->
+                  <td>
+                    <%= parseInt(i)+1%>
+                  </td>
+                
+                  <td>
+                    <%=response[i].name%>
+                  </td>
+                  <td>
+                    <% if(response[i].dataValues.category && response[i].dataValues.category!='' && response[i].dataValues.category.dataValues.name && (response[i].dataValues.category.dataValues.name!='' || response[i].dataValues.category.dataValues.name != 'null')){%>
+                      <%=response[i].dataValues.category.dataValues.name%>
+                      <% }%>
+                  </td>
+                  <td>
+                    <% if(response[i].dataValues.mainCategory && response[i].dataValues.mainCategory!='' && response[i].dataValues.mainCategory.dataValues.title && (response[i].dataValues.mainCategory.dataValues.title!='' || response[i].dataValues.mainCategory.dataValues.title != 'null')){%>
+                    <%=response[i].dataValues.mainCategory.dataValues.title%>
+                    <% }%>
+                  </td> 
+                 <!--  <td> <img src="<%=response[i].image %>" style="width:40px;height:40px;" /></td> -->
+
+                  <!-- <td>
+
+                                        <label class="switch">
+                                            <input id="" data-model="User" type="checkbox" class="change_status">
+                                            <span class="slider round"></span>
+                                        </label> -->
+                  <!-- <div class="onoffswitch">
+                                              <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example">
+                                              <label class="onoffswitch-label" for="example">
+                                              <span class="onoffswitch-inner"></span>
+                                              <span class="onoffswitch-switch"></span>
+                                            </label>
+                                            </div> -->
+                  <!-- </td> -->
+                  <td>
+                    <div class="btn-group project-list-action">
+                      <a href="/edit_subcate?id=<%=response[i].id;%>" class="btn btn-white btn-xs">Edit</a>
+                    </div>
+
+                    <div class="btn-group project-list-ad-rd">
+                      <a class="Danger danger-color btn btn-white btn-xs new_delete_row" data_id="<%=response[i].id%>"
+                        table_model="subcategories" style="background: red;" data-toggle="modal"
+                        data-target="#newDangerModalalert">Delete</a>
+
+                    </div>
+
+                  </td>
+                  </tr>
+
+
+
+
+                  <%  }
+                                    } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<% include ../partials/footer.ejs %>

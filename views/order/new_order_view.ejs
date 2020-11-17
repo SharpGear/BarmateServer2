@@ -1,0 +1,217 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+<style>
+img#margnn {
+    height: 200px;
+    width: 200px;
+    margin-top: 25px;
+}
+div#ordr_divv {
+    float: right;
+    margin-top: 40px;
+}
+b#usr {
+    float: left;
+    padding: 15px;
+}
+</style>
+<div class="basic-form-area mg-b-15">
+  <div class="container-fluid">
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline12-list shadow-reset mg-t-30">
+          <div class="sparkline12-hd">
+            <div class="main-sparkline12-hd">
+              <h1>View Order</h1>
+
+             
+            </div>
+          </div>
+          <div class="sparkline12-graph">
+            <div class="row">
+             
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                 
+                <div class="contact-client-single ct-client-b-mg-30 ct-client-b-mg-30-n shadow-reset">
+                   
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <span><b style="font-size: 16px; color:red">Order Detail :
+                          <!-- <%= parseInt(0)+1%> --></b></span>
+                                <br>
+                          <div class="project-details-dt">
+                              <% if(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.image && (response[0].dataValues.venue.image!='' || response[0].dataValues.venue.dataValues.image!='null')){ %>
+                                <img id="margnn" src="<%=response[0].dataValues.venue.dataValues.image %>"  />
+                                <% }else {%>
+                                no image added yet
+
+                              <%  } %>
+                            </div>
+                     
+                    </div>
+                    
+                    <div class="col-lg-8" id = "ordr_divv">
+     <b>Venue:</b>
+     <p>
+      <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.name && (response[0].dataValues.venue.name!='' || response[0].dataValues.venue.dataValues.name!='null'))? response[0].dataValues.venue.dataValues.name:''%>
+     </p>
+                      <b>Terminal:</b>
+                      <p> <i class="fa fa-map-marker"></i>
+                        <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.terminal!='' || response[0].dataValues.terminal!='null') && response[0].dataValues.terminal.dataValues.name && (response[0].dataValues.terminal.name!='' || response[0].dataValues.terminal.dataValues.name!='null'))? response[0].dataValues.terminal.dataValues.name:''%>
+                      </p>
+                       <b>Username:</b>
+                                            <p>
+                                              <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.userDetail!='' || response[0].dataValues.userDetail!='null') && response[0].dataValues.userDetail.dataValues.name && (response[0].dataValues.userDetail.name!='' || response[0].dataValues.userDetail.dataValues.name!='null'))? response[0].dataValues.userDetail.dataValues.name:''%>
+                                            </p> 
+
+                                            <b>TBM Service:</b>
+                                            <p>
+                                             $ <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.order!='' || response[0].dataValues.order!='null') && response[0].dataValues.order.dataValues.tbm_service && (response[0].dataValues.order.tbm_service!='' || response[0].dataValues.order.dataValues.tbm_service!='null'))? response[0].dataValues.order.dataValues.tbm_service:''%>
+                                            </p> 
+                                            <b>Total:</b>
+                                            <p>
+                                              $ <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.order!='' || response[0].dataValues.order!='null') && response[0].dataValues.order.dataValues.total && (response[0].dataValues.order.total!='' || response[0].dataValues.order.dataValues.total!='null'))? response[0].dataValues.order.dataValues.total:''%>
+                                            </p> 
+                                             
+                                            <b>Order Status:</b>
+                                            <p>
+                                              <% if(response[0].dataValues.order.dataValues.status=='2'){%><span
+                                                class="label label-info">Making</span>
+                                            <%}else if(response[0].dataValues.order.dataValues.status=='1'){%><span
+                                                class="label label-warning">Pending</span>
+
+                                            <%}else if(response[0].dataValues.order.dataValues.status=='5'){%><span class="label label-danger">Cancelled</span>
+                                            <%} else {%> <span class="label label-success">Collected</span> <%}%>
+                                            </p> 
+                                            <b>Date:</b>
+                                            <p>
+                                               <%=(new Date(response[0].dataValues.order.dataValues.createdAt * 1000)).toGMTString(); %>
+                                            </p>
+                                           
+                    </div>
+                 
+                    <div class="col-lg-12">
+                      <div class="sparkline8-list shadow-reset">
+
+                        <div class="sparkline8-graph">
+                          <div class="static-table-list">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Product</th>
+                                  <th>Quantity</th>
+                                  <th>Price</th>
+                                  <th>Action</th>
+                                  
+                                </tr>
+                              </thead>
+                              <tbody>
+                                  <% if(response && response!=''){
+                                    for(let i in response){
+                                %>
+                               
+                                <tr>
+                                  <td>
+                                    <%=(response[i] && (response[i]!='' || response[i]!='null') && (response[i].dataValues.product!='' || response[i].dataValues.product!='null') && response[i].dataValues.product.dataValues.name && (response[i].dataValues.product.name!='' || response[i].dataValues.product.dataValues.name!='null'))? response[i].dataValues.product.dataValues.name:''%> ( <%=(response[i] && (response[i]!='' || response[i]!='null') && (response[i].dataValues.product!='' || response[i].dataValues.product!='null') && response[i].dataValues.product.dataValues.quantity && (response[i].dataValues.product.quantity!='' || response[i].dataValues.product.dataValues.quantity!='null'))? response[i].dataValues.product.dataValues.quantity:1%> )
+                                  </td>
+                                  <td>
+
+                                       <%=response[i].dataValues.quantity%>
+                                     </td>
+                                  <td>
+
+                                   $ <%=response[i].dataValues.price%>
+                                  </td>
+                                  <td>
+
+                                    <div class="btn-group project-list-action">
+                                      <a href="/venue_product?venue_id=<%=response[i].dataValues.venue_id%>&product_id=<%= response[i].dataValues.product_id%>" class="btn btn-white btn-xs">View</a>
+
+
+                                  </div>
+                                  </td>
+                                 
+                                 
+                                  
+                                 
+
+                                                                </tr>
+                                                                <%}
+                                                              }%>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               
+                
+                     
+              </div>
+
+
+
+
+                 <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+            <div class="contact-client-single ct-client-b-mg-30 ct-client-b-mg-30-n shadow-reset"> -->
+                    <div class="row">
+                     <!--  <div class="col-lg-4">
+                        <span><b style="font-size: 16px; color:red">User Detail :
+                            <%= parseInt(0)+1%> </b></span>
+                                  <br>
+                      </div> -->
+                      <div class="col-lg-8">
+                          <div class="col-lg-4" >
+                              <span><b id = "usr" style="font-size: 16px; color:red">User Detail :
+                                  <!-- <%= parseInt(0)+1%> --></b></span>
+                                        <br>
+                            </div>
+                        <div class="sparkline8-list shadow-reset" id ="usr_detail_">
+                          <div class="sparkline8-graph">
+                            <div class="static-table-list">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Name </th>
+                                    <th>Email</th>
+                                    <th>Address</th> 
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.userDetail!='' || response[0].dataValues.userDetail!='null') && response[0].dataValues.userDetail.dataValues.name && (response[0].dataValues.userDetail.name!='' || response[0].dataValues.userDetail.dataValues.name!='null'))? response[0].dataValues.userDetail.dataValues.name:''%>
+                                    </td>
+                                    <td>
+                                        <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.userDetail!='' || response[0].dataValues.userDetail!='null') && response[0].dataValues.userDetail.dataValues.email && (response[0].dataValues.userDetail.email!='' || response[0].dataValues.userDetail.dataValues.email!='null'))? response[0].dataValues.userDetail.dataValues.email:''%>
+                                      </td>
+                                      <td>
+                                          <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.userDetail!='' || response[0].dataValues.userDetail!='null') && response[0].dataValues.userDetail.dataValues.address && (response[0].dataValues.userDetail.address!='' || response[0].dataValues.userDetail.dataValues.address!='null'))? response[0].dataValues.userDetail.dataValues.address:''%>
+                                        </td>
+                                                                  </tr>                           
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                     </div>
+                        </div>
+                 <!-- </div>    
+              </div> -->
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,187 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+
+
+
+<!-- Basic Form Start -->
+<div class="basic-form-area mg-b-15">
+  <div class="container-fluid">
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline12-list shadow-reset mg-t-30">
+          <div class="sparkline12-hd">
+            <div class="main-sparkline12-hd">
+              <h1>Add Subcategory</h1>
+              <!-- <div class="sparkline12-outline-icon">
+                                <span class="sparkline12-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline12-collapse-close"><i class="fa fa-times"></i></span>
+                            </div> -->
+            </div>
+          </div>
+          <div class="sparkline12-graph">
+            <div class="basic-login-form-ad">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="all-form-element-inner">
+                    <form action="/add_subcate" class="adminpro-form" method="post" encType="multipart/form-data">
+                     
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <input type="hidden" id="check_id" value="0">
+                            <input type="hidden" id="check_model" value="User">
+
+                            <label class="login2 pull-right pull-right-pro">Main Category</label>
+                          </div>
+                          <div class="col-lg-9">
+                            <select class="form-control" id="main_category" name="main_category" required>
+                              <option value="" disabled selected>Select main category</option>
+                              <% 
+                                              if(main_cat_data && main_cat_data.length>0){
+                                                  for(var i in main_cat_data){
+
+                                                           %>
+                              <option value="<%= main_cat_data[i].id? main_cat_data[i].id : '' %>">
+                                <%= main_cat_data[i].title? main_cat_data[i].title : '' %>
+                              </option>
+                              <% }
+                                                }%>
+                            </select>
+                          </div>
+                        </div>
+                      </div> 
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <input type="hidden" id="check_id" value="0">
+                            <input type="hidden" id="check_model" value="User">
+
+                            <label class="login2 pull-right pull-right-pro">Category</label>
+                          </div>
+                          <div class="col-lg-9">
+                            <select class="form-control" id="category" name="category" required>
+                              <option value="" disabled selected>Select category</option>
+                               <!-- <% 
+                                              if(response && response.length>0){
+                                                  for(var k in response){
+
+                                                           %>
+                                                            <option value="<%= response[k].id? response[k].id : '' %>">
+                                                                <%= response[k].name? response[k].name : '' %>
+                                                            </option>
+                                                            <% }
+                                                }%>  -->
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <input type="hidden" id="check_id" value="0">
+                            <input type="hidden" id="check_model" value="User" required>
+
+                            <label class="login2 pull-right pull-right-pro">Name</label>
+                          </div>
+                          <div class="col-lg-9">
+                            <input type="text" class="form-control sub_cat_name"  name="name"  required/>
+                            <span class="sub_cat_name_chk" style="color:red;display:none;">Subcategory already exists in the selected Category</span>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                     <!--  <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <label class="login2 pull-right pull-right-pro">Image</label>
+                          </div>
+                          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="file-upload-inner ts-forms">
+                              <div class="input prepend-big-btn">
+                                <label class="icon-right" for="prepend-big-btn">
+                                  <i class="fa fa-download"></i>
+                                </label>
+                                <div class="file-button">
+                                  Browse
+                                  <input type="file" name="image" onchange="readURL(this);" required>
+                                </div>
+                                <input type="text" disabled class="filess" id="prepend-big-btn"
+                                  placeholder="no file selected">
+                              </div>
+                            </div>
+
+                            <img class="margn" src=""
+                              style="margin-top: 10px; margin-right: 601px; height:150px;width:150px; " id="blah"
+                              src="#" alt="" />
+
+                            <img class="margn" style="margin-top: 10px; margin-right: 601px;" id="blah" src="#"
+                              alt="" />
+
+
+                          </div>
+                        </div>
+                      </div> -->
+                      <div class="form-group-inner">
+                        <div class="login-btn-inner">
+                          <div class="row">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
+                              <div class="login-horizental cancel-wp pull-left">
+                                <button class="btn btn-white" type="reset"><a href="/subcate_list"> Cancel</a></button>
+                                <button class="btn btn-sm btn-primary login-submit-cs sub_cat_button" type="submit">Save
+                                  Change</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Basic Form End-->
+
+
+<% include ../partials/footer.ejs %>
+<script type="text/javascript">
+     // ONCLICK ON MAIN CATEGORY ID//
+    $("#main_category").on('click change', function () {
+      let venue_id = $(this).val();
+      $('.sub_cat_name').val('');
+      //console.log(venue_id);
+      $.ajax({
+        type: "post",
+        url: "/get_categorys",
+        data: { id: venue_id },
+        cache: false,
+        success: function (s) {
+  //console.log(s);
+          let htmlappend = '<option value="" disabled selected>Select your Category</option>';
+          if (s.length > 0) {
+            for (let i in s) {
+              htmlappend += '<option value="' + s[i].id + '">' + s[i].name + '</option>'
+            }
+          }
+          $("#category").html(htmlappend);
+        }
+      });
+    });
+    $("#category").on('change', function () {
+      $('.sub_cat_name').val('');
+      $('.sub_cat_name_chk').hide();
+    });
+  </script>

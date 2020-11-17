@@ -1,0 +1,208 @@
+<%- include ../partials/header.ejs %>
+    <%- include ../partials/sidebar.ejs %>
+        <%- include ../partials/navbar.ejs %>
+            <%- include ../partials/flash.ejs %>
+
+                <br>
+
+                <% if(msg && msg!=''){%>
+                    <div class="alert alert-success col-xs-8" id="msg">
+                        <span>
+    <%=msg ? msg: ''%>
+  </span>
+                    </div>
+                    <% }%>
+
+                        <div class="admin-dashone-data-table-area mg-b-15">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="sparkline8-list shadow-reset">
+                                            <div class="sparkline8-hd">
+                                                <div class="main-sparkline8-hd">
+                                                    <h1>Orders</h1>
+                                                    <div class="sparkline8-outline-icon">
+                                                        <!-- <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span> -->
+                                                        <!-- <a href="/add_order" class="btn btn-white btn-xs">+ Add order</a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="sparkline8-graph">
+                                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                                    <div id="toolbar">
+
+                                                        <!-- <select class="form-control"> -->
+                                                         <form method="GET" action="/order">
+
+                                                            <div class="col-lg-4">
+                                                                <b>Start Date:</b>
+                                                                <input type="text" name="start" class="form-control start" value="" required>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <b>End Date:</b>
+                                                                <input type="text" name="end" class="form-control end" value="" required>
+                                                            </div>
+                                                            <div class="col-lg-2 submit">
+
+                                                                <input type="submit" class="form-control submit" id="submit_date" value="Filter">
+                                                            </div>
+                                                        </form> 
+                                                        <!-- <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option> -->
+                                                        <!-- </select> -->
+                                                    </div>
+                                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="false" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                                        <thead>
+                                                            <tr>
+                                                                <!-- <th data-field="state" data-checkbox="true"></th> -->
+                                                                <th data-field="ID">Sr. No.</th>
+                                                                <th data-field="UserName" data-editable="false">Username</th>
+                                                                <th data-field="Name" data-editable="false">Venue</th>
+                                                                <th data-field="Terminal" data-editable="false">Terminal</th>
+                                                                <th data-field="Phone" data-editable="false">Total(<i class="fa fa-dollar"></i>)</th>
+                                                                <th data-field="Admin Earning" data-editable="false">TBM Service(<i class="fa fa-dollar"></i>)</th>
+                                                                <!-- <th data-field="Round" data-editable="false">Round</th> -->
+
+                                                                <th data-field="Status" data-editable="false">Status</th>
+                                                                <th data-field="Date" data-editable="false">Date</th>
+                                                                <th data-field="action">Action</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <% 
+                  if(response && response.length>0){
+                    for(var i in response){
+                      var d = new Date(response[i].createdAt * 1000);
+                     var dt = d.toGMTString();
+                       
+                       var formattedDate = dt; 
+                                    %>
+                                                                <!-- <td></td> -->
+                                                                <td>
+                                                                    <%= parseInt(i)+1%>
+                                                                </td>
+
+                                                                <td>
+                                                                    <%=(response[i].userDetail && response[i].userDetail!='null' && response[i].userDetail!='' && response[i].userDetail.dataValues.name!='')?response[i].userDetail.dataValues.name:'' %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= (response[i].venue && response[i].venue!='null' && response[i].venue!='' && response[i].venue.dataValues.name!='')?response[i].venue.dataValues.name:''%>
+                                                                </td>
+
+                                                                <td>
+                                                                    <%=(response[i].terminal && response[i].terminal!='null' && response[i].terminal!='' && response[i].terminal.dataValues.name!='')?response[i].terminal.dataValues.name:'' %>
+                                                                </td>
+
+                                                                <!-- <td class="datatable-ct"><span class="pie">1/6</span>
+                                        </td> -->
+                                                                <td>
+                                                                    <%= response[i].total%>
+                                                                </td>
+                                                                <td>
+                                                                    <%= response[i].tbm_service %>
+                                                                </td>
+                                                                <td>
+
+                                                                    <% if(response[i].status== 1){ %>
+
+                                                                        <div class="btn-group project-list-ad">
+
+                                                                            <span class="label label-warning status" value="<%= response[i].status %>" rel="<%=response[i].id%>">Pending</span>
+                                                                        </div>
+                                                                        <% }else if(response[i].status== 2){%>
+                                                                            <div class="btn-group project-list-ad-rd">
+                                                                                <span class="label label-info status" value="<%= response[i].status %>" rel="<%=response[i].id%>">Making</span>
+
+                                                                            </div>
+                                                                            <%}else if (response[i].status== 5) {%>
+                                                                                <div class="btn-group project-list-ad-rd">
+                                                                                    <span class="label label-danger status" value="<%= response[i].status %>" rel="<%=response[i].id%>">Cancelled</span>
+
+                                                                                </div>
+                                                                                <%} else {%>
+                                                                                    <div class="btn-group project-list-ad-rd">
+                                                                                        <span class="label label-success status" value="<%= response[i].status %>" rel="<%=response[i].id%>">Collected</span>
+    
+                                                                                    </div>
+                                                                                    <%}%>
+                                                                </td>
+                                                                <td>
+                                                                    <%= formattedDate %>
+                                                                </td>
+                                                                <!-- <td>
+                    
+                  </td> -->
+
+                                                                <!--  <td>
+                    
+                  </td> -->
+
+
+                                                                <!-- <div class="onoffswitch">
+                                          		<input type="checkbox" 
+                                                name="collapsemenu" class="onoffswitch-checkbox" id="example">
+                                          		<label class="onoffswitch-label" for="example">
+                                          		<span class="onoffswitch-inner"></span>
+                                          		<span class="onoffswitch-switch"></span>
+                                          	</label>
+                                          	</div> -->
+
+                                                                <td>
+                                                                    <!-- <div class="btn-group project-list-action">
+                                            <a href="/edit_order?id=<%=response[i].id;%>" class="btn btn-white btn-xs">Edit</a>
+
+
+                                        </div> -->
+                                                                    <div class="btn-group project-list-action">
+                                                                        <a href="/view_order?id=<%=response[i].id;%>" class="btn btn-white btn-xs">View</a>
+
+
+                                                                    </div>
+
+                                                                    <div class="btn-group project-list-ad-rd">
+                                                                        <a class="Danger danger-color btn btn-white btn-xs delete_row" data_id="<%= response[i].id%>" table_model="orders" style="background: red;" data-toggle="modal" data-target="#DangerModalalert">Delete</a>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                                </tr>
+
+
+
+                                                                <%  }
+                                    } %>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <% include ../partials/footer.ejs %>
+                            <script type="text/javascript">
+                                /* $(document).on('click', '#submit_date', () => {
+                                                                                                      let start = $(".start").val();
+                                                                                                      let end = $(".end").val();
+                                                                                                      $.ajax({
+                                                                                                          type: "get",
+                                                                                                          url: "/order?start=" + start + "&end=" + end,
+                                                                                                          success: function (data) {
+
+                                                                                                          }
+
+                                                                                                      });
+                                                                                                  }); */
+                            </script>

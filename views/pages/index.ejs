@@ -1,0 +1,130 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+
+<br>
+
+<% if(msg && msg!=''){%>
+<div class="alert alert-success col-xs-8" id="msg">
+    <span>
+        <%=msg ? msg: ''%>
+    </span>
+</div>
+<% }%>
+<!-- <div class="admin-dashone-data-table-area mg-b-15"> -->
+<div class="admin-dashone-data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- <div class="sparkline8-list shadow-reset"> -->
+                <div class="sparkline8-list shadow-reset">
+                    <div class="sparkline8-hd">
+                        <div class="main-sparkline8-hd">
+                            <h1>Users</h1>
+                            <div class="sparkline8-outline-icon">
+                                <!-- <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span> -->
+                                <!-- <a href="/add_user" class="btn btn-white btn-xs">+ Add User</a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sparkline8-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="false"
+                                data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true"
+                                data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <!-- <th data-field="state" data-checkbox="true"></th> -->
+                                        <th data-field="ID">Sr. No.</th>
+                                        <th data-field="Name" data-editable="false">Title</th>
+                                        <th data-field="Email" data-editable="false">Description</th>
+                                        <th data-field="action">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% 
+                                    if(response && response.length>0){
+                                    for(var i in response){
+                                        
+                                    %>
+                                    <!-- <td></td> -->
+                                    <td>
+                                        <%= parseInt(i)+1%>
+                                    </td>
+                                    <td>
+                                        <%=response[i].title%>
+                                    </td>
+
+                                    <td class="">
+                                        <%=response[i].description.substr(0,100)%>
+                                    </td>
+                                   
+
+                                    <td>
+                                        <div class="btn-group project-list-action">
+                                            <a href="/page?id=<%=response[i].id;%>" class="btn btn-white btn-xs">Edit</a>
+
+
+                                        </div>
+
+
+                                    </td>
+                                    </tr>
+
+
+
+
+                                    <%  }
+                                    } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer.ejs %>
+<script type="text/javascript">
+
+    $(document).on('click', '.status', function () {
+        let _this = $(this);
+        let _id = _this.attr('rel');
+        // let status = (_this.val() == 1) ? 0 : 1;
+        let status = _this.attr('value');
+        _this.val(status);
+        let table = _this.attr('table');
+        $.ajax({
+            type: "post",
+            url: "/update_status",
+            data: { id: _id, table: table, status: status },
+            cache: false,
+            success: function (html) {
+                if (html.done == 1) {
+                    if (html.status == '1') {
+                        _this.removeClass(".label label-success");
+                        _this.addClass(".label label-danger");
+                        _this.text('Inactive');
+                        _this.attr('value', '1');
+                    } else {
+                        _this.removeClass(".label label-danger");
+                        _this.addClass(".label label-success");
+                        _this.text('Active');
+                        _this.attr('value', '0');
+                    }
+                }
+            }
+        });
+    });
+</script>

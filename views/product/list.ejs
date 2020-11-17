@@ -1,0 +1,196 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+
+<br>
+
+<% if(msg && msg!=''){%>
+<div class="alert alert-success col-xs-8" id="msg">
+  <span>
+    <%=msg ? msg: ''%>
+  </span>
+</div>
+<% }%>
+
+<div class="admin-dashone-data-table-area mg-b-15">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline8-list shadow-reset">
+          <div class="sparkline8-hd">
+            <div class="main-sparkline8-hd">
+              <h1>Admin Products</h1>
+              <div class="sparkline8-outline-icon">
+                <!-- <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span> -->
+                <a href="/product" class="btn btn-white btn-xs">+ Add Product</a>
+              </div>
+            </div>
+          </div>
+         
+          <div class="sparkline8-graph">
+            <div class="datatable-dashv1-list custom-datatable-overright">
+              <div id="toolbar">
+                <!-- <select class="form-control">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select> -->
+              </div>
+              <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true"
+                data-show-pagination-switch="true" data-show-refresh="false" data-key-events="true"
+                data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId"
+                data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" data-page-number="1">
+                <thead>
+                  <tr>
+                    <!-- <th data-field="state" data-checkbox="true"></th> -->
+                    <th data-field="ID">Sr. No.</th>
+
+                    <!-- <th data-field="Name" data-editable="false">Name</th> -->
+                    <th data-field="product_name" data-editable="false">Product Name</th>
+                    <th data-field="brand" data-editable="false"> Brand</th>
+                    <th data-field="Image" data-editable="false">Image</th>
+                    <th data-field="main_Category_id" data-editable="false">Main Category</th>
+                    <th data-field="Category_id" data-editable="false">Category</th>
+                    <th data-field="subcategory_id" data-editable="false">Sub Category</th>
+                    <th data-field="price" data-editable="false">Price(<i class="fa fa-dollar"></i>)</th>
+                    <th data-field="quantity" data-editable="false">Quantity</th>
+                    <!-- <th data-field="image" data-editable="false">image</th> -->
+                    <!-- <th data-field="status" data-editable="false">status</th> -->
+
+                    <th data-field="action">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% 
+                                    if(response && response.length>0){
+                                    for(var i in response){
+                                    %>
+                  <!-- <td></td> -->
+                  <td>
+                    <%= parseInt(i)+1%>
+                  </td>
+                  <td>
+                      <!-- <%=response[i].brand ? response[i].brand.name : ''%>  -->
+                   <!--  <%=(response[i].venue && response[i].venue!='null' && response[i].venue!='' && response[i].venue.dataValues.name!='') ? response[i].venue.dataValues.name :''%> -->
+                   <%=response[i].name ? response[i].name : ''%>
+                  </td>
+                  <td>
+                      <%=response[i].brand ? response[i].brand.name : ''%>
+                     </td>
+                  <td>
+                   <img src= " <%=response[i].image %>" style="height:80px; width:80px" />
+                   </td>
+                  <td>
+                    <%=(response[i].mainCategory && response[i].mainCategory!='null' && response[i].mainCategory!='' && response[i].mainCategory.dataValues.title!='') ? response[i].mainCategory.dataValues.title :''%>
+                  </td>
+                 
+                  <td>
+                    <%=(response[i].category && response[i].category!='null' && response[i].category!='' && response[i].category.dataValues.name!='') ? response[i].category.dataValues.name :''%>
+                  </td>
+                  <td>
+                    <%=(response[i].subcategory && response[i].subcategory!='null' && response[i].subcategory!='' && response[i].subcategory.dataValues.name!='') ? response[i].subcategory.dataValues.name :''%>
+                  </td>
+                  <td>
+                    <%=response[i].price%>
+                  </td>
+                  <td>
+                    <%=response[i].quantity%>
+                  </td>
+
+
+
+                  <!-- <td> <img src="<%='/images/'+response[i].image %>" style="width:40px;height:40px;" /></td> -->
+
+                  <!-- <td>
+
+                                        <label class="switch">
+                                            <input id="" data-model="User" type="checkbox" class="change_status"  >
+                                            <span class="slider round"></span>
+                                          </label> -->
+                  <!-- <div class="onoffswitch">
+                                              <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example">
+                                              <label class="onoffswitch-label" for="example">
+                                              <span class="onoffswitch-inner"></span>
+                                              <span class="onoffswitch-switch"></span>
+                                            </label>
+                                            </div> -->
+                  <!-- </td> -->
+                  <td>
+                    <div class="btn-group project-list-action">
+                      <a href="/edit_product?id=<%=response[i].id;%>" class="btn btn-white btn-xs">Edit</a>
+                    </div>
+
+                    <div class="btn-group project-list-ad-rd">
+                      <a class="Danger danger-color btn btn-white btn-xs delete_row" data_id="<%=response[i].id%>"
+                        table_model="admin_products" style="background: red;" data-toggle="modal"
+                        data-target="#DangerModalalert">Delete</a>
+
+                    </div>
+
+                  </td>
+                  </tr>
+
+
+
+
+                  <%  }
+                                    } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<% include ../partials/footer.ejs %>
+<script>
+// $(document).ready(function() {
+//   sessionStorage.setItem("page", 10);
+//   $(document).on('click', function(e) {
+//     console.log(e);
+//     // let val = $(this).text();
+//     // sessionStorage.setItem("page", val);
+//     // alert(sessionStorage.getItem("page"));
+//   });
+// });
+
+// $(document).ready(function () {
+//     $('.pagination li a').click(function(e) {
+//       alert('asd');
+//     });
+// });
+
+// $(document).ready(function(){
+  // $(document.body).delegate('click', '.page-link', function( e ){
+  //   //  e.preventDefault();
+  //    let val = $(this).text();
+  //     alert(val);   //                              from being followed
+  //   var _this = $(this);  
+  //     console.log(_this);
+  //     return false; // <---------or this if you want to prevent bubbling as well
+  // });
+  // $(document.body).on('click', 'body', function( e ){
+  //   let el = $('.page-link');
+  //   console.log(el);
+  // });
+// });
+
+
+$(document).ready(function() {
+  setInterval(() => { 
+    var activePageElement = $('.pagination').find('.page-item.active').text();
+      
+    sessionStorage.setItem("page", activePageElement);
+  },500);
+});
+
+$("#table").attr("data-page-number",sessionStorage.getItem("page"));
+</script>

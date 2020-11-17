@@ -1,0 +1,108 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+
+
+
+<!-- Basic Form Start -->
+<div class="basic-form-area mg-b-15">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline12-list shadow-reset mg-t-30">
+                    <div class="sparkline12-hd">
+                        <div class="main-sparkline12-hd">
+                            <h1>Swift POS Integration for <%=venue.name;%></h1>
+                            <!-- <div class="sparkline12-outline-icon">
+                                <span class="sparkline12-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline12-collapse-close"><i class="fa fa-times"></i></span>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="sparkline12-graph" style="text-align: left;">
+                        <div class="basic-login-form-ad">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <img src="/img/integrations/swift.png" alt="" style="width: 100px; height: 100px;">
+                                    <%if(venue_integration && venue_integration.completed){%>
+                                    <div class="well">
+                                        <form action="/venue_integrations_swift_import" method="post">
+                                            <input type="hidden" name="id" value="<%=venue.id%>">
+                                            <button type="submit" class="btn btn-primary"
+                                            >Import Products</button>
+                                        </form>
+                                        <br>
+                                        <div>Imports all products from the Swift POS.</div>
+                                        <a href="/product_list?id=<%=venue.id%>">View all products</a>
+                                    </div>
+                                    <div class="well">
+                                        <form action="/venue_integrations_swift_delete" method="post">
+                                            <input type="hidden" name="id" value="<%=venue.id%>">
+                                            <button type="submit" class="btn btn-warning">Delete Products</button>
+                                        </form>
+                                        <br>
+                                        <div>Deletes all imported products from the Swift POS.</div>
+                                    </div>
+                                    <hr>
+                                        <form action="/venue_integrations_swift_disconnect" method="post">
+                                            <input type="hidden" name="id" value="<%=venue.id%>">
+                                            <button type="submit" class="btn btn-danger">Disconnect</button>
+                                        </form>
+                                    <%}else{%>
+                                        <form action="/venue_integrations_swift_connect" method="post" autocomplete="off">
+                                            <input type="hidden" name="id" value="<%=venue.id%>">
+                                            <div class="form-group">
+                                                <label for="1">Location ID</label>
+                                                <input
+                                                        type="text" class="form-control" id="1"
+                                                        placeholder="Location ID" name="location_id" required autocomplete="new-password"
+                                                        value="1"
+                                                >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="2">User ID</label>
+                                                <input
+                                                        type="text" class="form-control" id="2"
+                                                        placeholder="User ID" name="user_id" required autocomplete="new-password"
+                                                        value="0"
+                                                >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="3">Password</label>
+                                                <input
+                                                        type="password" class="form-control" id="4"
+                                                        placeholder="Password" name="password" required autocomplete="new-password"
+                                                        value="0"
+                                                >
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Connect</button>
+                                        </form>
+                                    <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Basic Form End-->
+
+
+<% include ../partials/footer.ejs %>
+<script type="text/javascript">
+	$(document).ready(function (e) {
+
+		function myFunction() {
+			$("#password").val('');
+			$("#name").val('');
+		}
+		setTimeout(myFunction, 1000);
+
+	});
+</script>

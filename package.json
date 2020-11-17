@@ -1,0 +1,51 @@
+{
+  "name": "test123",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "atob": "^2.1.2",
+    "axios": "^0.21.0",
+    "body-parser": "^1.18.3",
+    "boom": "^7.3.0",
+    "braintree": "^2.22.0",
+    "btoa": "^1.2.1",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-bearer-token": "^2.4.0",
+    "express-fileupload": "^1.0.0",
+    "express-session": "^1.15.6",
+    "fcm-node": "^1.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.4",
+    "node-cron": "^2.0.3",
+    "node-datetime": "^2.1.2",
+    "nodemailer": "^5.1.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "paypal-rest-sdk": "^1.8.1",
+    "request": "^2.88.2",
+    "reverse-md5": "0.0.4",
+    "save": "^2.3.3",
+    "sequelize": "^4.42.0",
+    "sequelize-auto": "^0.4.29",
+    "session": "^0.1.0",
+    "simple-oauth2": "^3.4.0",
+    "stripe": "^8.44.0",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "myself",
+  "license": "ISC",
+  "keywords": [],
+  "description": ""
+}

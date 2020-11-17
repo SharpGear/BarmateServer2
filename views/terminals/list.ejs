@@ -1,0 +1,110 @@
+<%- include ../partials/header.ejs %>
+    <%- include ../partials/sidebar.ejs %>
+        <%- include ../partials/navbar.ejs %>
+            <%- include ../partials/flash.ejs %>
+
+                <br>
+
+
+                <% if(msg && msg!=''){%>
+                    <div class="alert alert-success col-xs-8" id="msg">
+                        <span>
+        <%=msg ? msg: ''%>
+    </span>
+                    </div>
+                    <% }%>
+                        <div class="admin-dashone-data-table-area mg-b-15">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="sparkline8-list shadow-reset">
+                                            <div class="sparkline8-hd">
+                                                <div class="main-sparkline8-hd">
+                                                    <h1>Terminals</h1>
+                                                    <div class="sparkline8-outline-icon">
+                                                        <!-- <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span> -->
+                                                        <a href="/add_terminal" class="btn btn-white btn-xs">+ Add Terminal</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="sparkline8-graph">
+                                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                                <div id="toolbar">
+                                                    <!-- <select class="form-control">
+                                <option value="">Export Basic</option>
+                                <option value="all">Export All</option>
+                                <option value="selected">Export Selected</option>
+                            </select> -->
+                                                </div>
+                                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="false" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                                    data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th data-field="ID">Sr. No.</th>
+                                                            <th data-field="Venue" data-editable="false">Venue</th>
+                                                            <th data-field="Terminal" data-editable="false">Terminal</th>
+                                                            <th data-field="Email" data-editable="false">Email</th>
+                                                            <th data-field="action">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% 
+                                    if(response && response.length>0){
+                                    for(var i in response){
+                                    %>
+
+                                                            <td>
+                                                                <%= parseInt(i)+1%>
+                                                            </td>
+
+
+
+                                                            <td>
+                                                                <%=(response[i].venue && response[i].venue!='null' && response[i].venue!='' && response[i].venue.dataValues.name!='') ? response[i].venue.dataValues.name :''%>
+                                                            </td>
+                                                            <td>
+                                                                <%=response[i].name %>
+                                                            </td>
+                                                            <td>
+                                                                <%=(response[i].terminalDetail && response[i].terminalDetail!='null' && response[i].terminalDetail!='' && response[i].terminalDetail.dataValues.email!='') ? response[i].terminalDetail.dataValues.email :''%>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="btn-group project-list-action">
+                                                                    <a href="/edit_terminal?id=<%=response[i].id;%>" class="btn btn-white btn-xs">Edit</a>
+                                                                </div>
+                                                                <div class="btn-group project-list-action">
+                                                                    <a href="/view_terminal?id=<%=response[i].id;%>" class="btn btn-white btn-xs">View</a>
+                                                                </div>
+                                                                <div class="btn-group project-list-ad-rd">
+                                                                    <a class="Danger danger-color btn btn-white btn-xs delete_row" data_id="<%= response[i].id%>" table_model="terminals" style="background: red;" data-toggle="modal" data-target="#DangerModalalert">Delete</a>
+
+                                                                </div>
+
+
+                                                            </td>
+                                                            </tr>
+
+
+
+
+                                                            <%  }
+                                    } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+
+
+                        <% include ../partials/footer.ejs %>

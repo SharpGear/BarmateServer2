@@ -1,0 +1,258 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+
+<br>
+
+
+<% if(msg && msg!=''){%>
+<div class="alert alert-success col-xs-8" id="msg">
+    <span>
+        <%=msg ? msg: ''%>
+    </span>
+</div>
+<% }%>
+<div class="admin-dashone-data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline8-list shadow-reset">
+                    <div class="sparkline8-hd">
+                        <div class="main-sparkline8-hd">
+                            <h1>Venues</h1>
+                            <div class="sparkline8-outline-icon">
+
+                                <a href="/createVenue" class="btn btn-white btn-xs">+ Add Venue</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sparkline8-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            <div id="toolbar">
+                                <form method="GET" action="/vanue">
+
+                                    <div class="col-lg-4">
+                                        <b>Start Date:</b>
+                                        <input type="text" name="start" class="form-control start" value="" required>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <b>End Date:</b>
+                                        <input type="text" name="end" class="form-control end" value="" required>
+                                    </div>
+                                    <div class="col-lg-2 submit">
+
+                                        <input type="submit" class="form-control" id="submit_date" value="Filter">
+                                    </div>
+                                </form>
+                            </div>
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="false"
+                                data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true"
+                                data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <!-- <th data-field="state" data-checkbox="true"></th> -->
+                                        <th data-field="Sr. No.">Sr. No.</th>
+                                        <th data-field="Name" data-editable="false">Business Name</th>
+                                        <th data-field="Email" data-editable="false">Email</th>
+                                        <th data-field="Image" data-editable="false">Image</th>
+                                        <th data-field="Card Status" data-editable="false">Card Status</th>
+                                        <th data-field="Type" data-editable="false">Card Type</th>
+                                        <th data-field="Status" data-editable="false">Status</th>
+                                        <!-- <th data-field="Date" data-editable="false">Date</th> -->
+                                        <th data-field="action">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% 
+                                    if(response && response.length>0){
+                                    for(var i in response){
+                                    %>
+                                    <!-- <td></td> -->
+                                    <td>
+                                        <%= parseInt(i)+1%>
+                                    </td>
+                                    <td>
+                                        <%=response[i].name%>
+                                    </td>
+                                    <td class="">
+                                        <%=response[i].email%>
+                                    </td>
+                                    <td> <img src="<%=response[i].image %>" style="width:40px;height:40px;" /></td>
+                                    <td>
+                                        <% if(response[i].card_verified && response[i].card_verified!='' && response[i].card_verified=='1'){%>
+                                        <div class="btn-group project-list-ad">
+
+                                            <span class="label label-success">Verified</span>
+                                        </div>
+                                        <% }else{%>
+                                        <div class="btn-group project-list-ad-rd">
+                                            <span class="label label-danger">Not Verified</span>
+
+                                        </div>
+                                        <%}%>
+                                    </td>
+                                    <td>
+                                        <% if(response[i].card_type && response[i].card_type!='' && response[i].card_type=='1'){%>
+                                        <div class="btn-group project-list-ad">
+
+                                            <span class="label label-default">Credit Card</span>
+                                        </div>
+                                        <% }else if(response[i].card_type && response[i].card_type!='' && response[i].card_type=='2'){%>
+                                        <div class="btn-group project-list-ad-rd">
+                                            <span class="label label-warning">Master Card</span>
+
+                                        </div>
+                                        <%} else if(response[i].card_type && response[i].card_type!='' && response[i].card_type=='3'){%>
+                                        <div class="btn-group project-list-ad-rd">
+                                            <span class="label label-primary">Visa Card</span>
+
+                                        </div>
+                                        <%}else{%>
+                                        <div class="btn-group project-list-ad-rd">
+                                            <span class="label label-info">Debit Card</span>
+
+                                        </div>
+                                        <%}%>
+                                    </td>
+                                    <td>
+
+                                        <% if(response[i].status==0){ %>
+
+                                        <div class="btn-group project-list-ad">
+
+                                            <span class="label label-success status" value="<%= response[i].status %>"
+                                                table="users" rel="<%=response[i].id%>">Active</span>
+                                        </div>
+                                        <% }else{%>
+                                        <div class="btn-group project-list-ad-rd">
+                                            <span class="label label-danger status" value="<%= response[i].status %>"
+                                                rel="<%=response[i].id%>" table="Users">Inactive</span>
+
+                                        </div>
+                                        <%}%>
+                                    </td>
+                                   <!--  <td>
+
+                                        <%=response[i].time%>
+                                    </td> -->
+
+                                    <td>
+                                        <div class="btn-group project-list-action">
+                                            <a href="/venue_integrations?id=<%=response[i].id;%>" class="btn btn-white btn-xs">Integrations</a>
+                                        </div>
+                                            <div class="btn-group project-list-action"> 
+                                                    <a href="/venue_sale_data?id=<%=response[i].id;%>" class="btn btn-white btn-xs">Sales</a>
+        
+                                         </div> 
+                                             <div class="btn-group project-list-action"> 
+                                                    <a href="/product_list?id=<%=response[i].id;%>" class="btn btn-info btn-xs">Products</a>
+        
+                                                 </div>
+                                        <div class="btn-group project-list-action"> 
+                                            <a href="/edit_vanue?id=<%=response[i].id;%>" class="btn btn-white btn-xs">Edit</a>
+                                         </div>
+
+                                        <div class="btn-group project-list-ad-rd"> 
+                                            <a class="Danger danger-color btn btn-white btn-xs delete_row" data_id="<%=response[i].id;%>"
+                                                table_model="venues" style="background: red;" data-toggle="modal"
+                                                data-target="#DangerModalalert">Delete</a>
+
+                                         </div> 
+
+                                    </td>
+                                    </tr>
+
+
+
+                                    <%  }
+                                    } %>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer.ejs %>
+
+<script type="text/javascript">
+    $(document).on('click', '.status', function () {
+        let _this = $(this);
+        let _id = _this.attr('rel');
+        // let status = (_this.val() == 1) ? 0 : 1;
+        let status = _this.attr('value');
+        _this.val(status);
+        let table = _this.attr('table');
+        $.ajax({
+            type: "post",
+            url: "/update_status_venue",
+            data: { id: _id, table: table, status: status },
+            cache: false,
+            success: function (html) {
+                if (html.done == 1) {
+                    if (html.status == '1') {
+                        _this.removeClass(".label label-success");
+                        _this.addClass(".label label-danger");
+                        _this.text('Inactive');
+                        _this.attr('value', '1');
+                    } else {
+                        _this.removeClass(".label label-danger");
+                        _this.addClass(".label label-success");
+                        _this.text('Active');
+                        _this.attr('value', '0');
+                    }
+                }
+            }
+        });
+    });
+
+</script>
+<script>
+    /*  $(".submit_button").on("click", function () {
+         // e.preventDefault();
+         var from = stringToDate($(".start").val());
+         var to = stringToDate($(".end").val());
+         console.log(from);
+         console.log(to); return false;
+         $(".fbody tr").each(function () {
+             var row = $(this);
+             var date = stringToDate(row.find("td").eq(2).text());
+
+             //show all rows by default
+             var show = true;
+
+             //if from date is valid and row date is less than from date, hide the row
+             if (from && date < from)
+                 show = false;
+
+             //if to date is valid and row date is greater than to date, hide the row
+             if (to && date > to)
+                 show = false;
+
+             if (show)
+                 row.show();
+             else
+                 row.hide();
+         });
+     });
+
+     //parse entered date. return NaN if invalid
+     function stringToDate(s) {
+         var ret = NaN;
+         var parts = s.split("/");
+         date = new Date(parts[2], parts[0], parts[1]);
+         if (!isNaN(date.getTime())) {
+             ret = date;
+         }
+         return ret;
+     } */
+</script>

@@ -1,0 +1,199 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs ;%>
+<% 
+Order=order_data.dataValues;
+User=order_data.User.dataValues;
+Store=order_data.Store.dataValues;
+
+
+%>
+<br>
+
+            <div class="project-details-area mg-b-15">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                            <div class="project-details-wrap shadow-reset">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                        <div class="project-details-title">
+                                            <h4><span class="profile-details-name-nn"><b>
+                                                Store info</b>
+
+                                                </h4>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <div class="admin-comment-month project-details-action">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Name:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <span><%= Store.first_name %></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Email:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <span><%= Store.email%></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                                  
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                                       <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Phone:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <span><%= Store.phone%></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Address:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <%= Store.address %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>         
+                                        
+                                    </div>
+                                </div>
+                                <hr>
+                                <h4><b> User Info</b></h4>
+                                <div class="row">
+                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                                      <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Name:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <span><%= User.first_name%></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Phone:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <span><%= User.phone %></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <hr>
+                                <h4><b>Order Items</b></h4>
+                                 <% 
+                                        
+
+                                  Order_items.forEach((data, index) => {
+                                  item=data.Item;
+                                  order_item=data.dataValues;
+                                   %>
+                                     <div class="row">
+                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                      <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Name:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <span><%= item.name ;%></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Price:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <span><%= item.price %></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                      <div class="project-details-mg">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="project-details-st">
+                                                        <span><strong>Quantity:</strong></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                    <div class="project-details-dt">
+                                                        <span><%= order_item.quantity ;%></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                 <%  }); %>
+                            </div>
+                        </div>
+
+
+<% include ../partials/footer.ejs %>

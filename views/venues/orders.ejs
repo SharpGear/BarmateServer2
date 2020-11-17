@@ -1,0 +1,155 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+<% console.log(Orders);  %>
+<br>
+
+
+
+<div class="admin-dashone-data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline8-list shadow-reset">
+                    <div class="sparkline8-hd">
+                        <div class="main-sparkline8-hd">
+                            <h1>
+                                <%
+                                let Order_status='';
+                                 switch (Number(title)) {
+                                  case 0:
+                                    Order_status = "All Order";
+                                    break;
+                                  case 1:
+                                    Order_status = "Processing Orders";
+                                    break;
+                                  case 2:
+                                     Order_status = "Completed Orders";
+                                    break;
+                                  case 3:
+                                    Order_status = "Canceled Orders";
+                                    break;
+                                  };         
+                                %><%= Order_status %>
+                            </h1>
+                            <div class="sparkline8-outline-icon">
+                                <!-- <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span> -->
+                               <!--  <a href="/addOrder" class="btn btn-white btn-xs" >+ Add Order</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sparkline8-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            <div id="toolbar">
+                                <select class="form-control">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select>
+                            </div>
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="Order No">Order No</th>
+                                        <th data-field="Order Date" data-editable="false">Order Date</th>
+                                        <th data-field="User Name" data-editable="false">User Name</th>
+                                        <th data-field="Store Name" data-editable="false">Store Name</th>
+                                        <th data-field="Total Amount" data-editable="false">Total Amount</th>
+                                        <th data-field="Order Status" data-editable="false">Order Status</th>
+
+                                        <th data-field="Payment Type" data-editable="false">Payment Type</th>
+                                        <th data-field="Payment Status" data-editable="false">Payment Status</th>
+                                       <!--  <th data-field="vat tax" data-editable="false">vat tax</th> -->
+                                        <th data-field=" site commision" data-editable="false"> site commision</th>
+                                         
+                                        <!-- <th data-field="Status">Status</th> -->
+                                        <th data-field="action">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                    var x=0;
+                                    if(!empty(Orders) && Orders !='' && Orders !=''){
+                                    Orders.forEach((data, index) => {
+
+                                      Order=data.dataValues;
+                                      Store=data.Store;
+                                      User=data.User;
+                                      var formattedDate=dateTime(  Order.createdAt, 'fullDate');
+                                      x++;
+                                      %>
+                                    <tr>
+                                        <td></td>
+                                        <td><%= x %> </td>
+                                        <td><%= formattedDate %></td>
+
+                                        <td><%= User.first_name %></td>
+                                        <td><a href="/viewstore?store_id=<%= Store.id;%>" ><%= Store.first_name %></a></td>
+                                        <td><%= Order.total_sum %></td>
+                                         <td><%
+
+                                            let Order_status='';
+                                             switch (Number(Order.status)) {
+                                              case 0:
+                                                Order_status = "Not confirmed yet";
+                                                break;
+                                              case 1:
+                                                Order_status = "Processing";
+                                                break;
+                                              case 2:
+                                                 Order_status = "Completed";
+                                                break;
+                                              case 3:
+                                                Order_status = "Declined By store";
+                                                break;
+                                              case 4:
+                                                Order_status = "Canceled By User";
+                                                break;
+                                              case 5:
+                                                Order_status = "Confirmed";
+                                                break;
+                                              case 6:
+                                                Order_status = "SaturOrder_status";
+                                            };
+                                        %>  <%= Order_status; %></td>
+                                        <td><%= Order.payment_type == '1' ? 'Card' : 'Paypal';  %></td>
+                                        <td><%= Order.payment_status == '1' ? 'Paid' : 'Not Paid';  %></td>
+                                        <!-- <td><%= Order.vat_tax %></td> -->
+                                        <td><%=Order.site_commision%></td>
+                                    <!-- <td>
+
+                                        <label class="switch">
+                                            <input id="<%= Order.id; %>" data-model="Order" type="checkbox" class="change_status"   <%= Order.status==1 ? 'checked' :''  %> >
+                                            <span class="slider round"></span>
+                                          </label>
+                                        </td> -->
+                                        <td>
+                                        <div class="btn-group project-list-action">
+                                          <a href="/vieworder?order_id=<%= Order.id;%>" class="btn btn-white btn-xs">View</a>
+                                        </div>
+                                        </td>
+                                    </tr>
+
+
+
+                                    <% }
+                                    ) } %>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer.ejs %>

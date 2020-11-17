@@ -1,0 +1,337 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+
+
+
+
+<!-- Basic Form Start -->
+<div class="basic-form-area mg-b-15">
+  <div class="container-fluid">
+
+    <div class="row">
+      <% if(msg && msg!=''){%>
+        <div class="alert alert-success col-xs-8" style="margin-bottom: -28px;
+        margin-left: 13px;" id="msg">
+          <span>
+            <%=msg ? msg: ''%>
+          </span>
+        </div>
+        <% }%>
+      <div class="col-lg-12">
+        <div class="sparkline12-list shadow-reset mg-t-30">
+          <div class="sparkline12-hd">
+            <div class="main-sparkline12-hd">
+              <h1>Edit Product</h1>
+              <!-- <div class="sparkline12-outline-icon">
+                                <span class="sparkline12-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline12-collapse-close"><i class="fa fa-times"></i></span>
+                            </div> -->
+            </div>
+          </div>
+          <div class="sparkline12-graph">
+            <div class="basic-login-form-ad">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="all-form-element-inner">
+                    <form action="/update_product" class="adminpro-form" method="post" encType="multipart/form-data">
+                      <input type="hidden" name="id" value="<%=response[0].id%>">
+                      
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                             <input type="hidden" id="check_id" value="0">
+                            <input type="hidden" id="check_model" value="User"> 
+
+                            <label class="login2 pull-right pull-right-pro">Brand</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <select class="form-control" name="brand_id">
+                                  <option disabled selected >Select Brand</option>
+                                  <% 
+                                    brands.forEach((brand)=>{%>
+                                      <option required="required" value="<%= brand.id%>"<% if(response[0].brand_id == brand.id){ %>selected <%}%>><%= brand.name%></option>
+                                  <% })%>
+                                </select>
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group-inner">
+                          <div class="row">
+                            <div class="col-lg-3">
+                               <input type="hidden" id="check_id" value="0">
+                              <input type="hidden" id="check_model" value="User"> 
+  
+                              <label class="login2 pull-right pull-right-pro">Product</label>
+                            </div>
+                            <div class="col-lg-9">
+                              <input type="text" class="form-control" placeholder= "Product" value="<%=response[0].name%>" name="name" required />
+                            </div>
+                          </div>
+                        </div>
+                      <div class="form-group-inner">
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <input type="hidden" id="check_id" value="0">
+                            <input type="hidden" id="check_model" value="User">
+
+                            <label class="login2 pull-right pull-right-pro">Main Category</label>
+                          </div>
+                          <div class="col-lg-9">
+                            <select class="form-control" id="main_category" name="main_category" required>
+                               <option value="" disabled selected>Select main category</option>
+                               <% 
+                                                                                          if(main_cat && main_cat.length>0){
+                                                                                              for(var i in main_cat){
+                                            
+                                                                                                       %>
+                              <option <% if(response[0].main_category_id == main_cat[i].id){ %>selected <%}%> value="<%= main_cat[i].id? main_cat[i].id : '' %>"
+                               >
+                                                                <%= main_cat[i].title? main_cat[i].title : '' %>
+                                </option> <% }
+                                                                                            }%>   </select> </div> </div>
+                                </div> 
+                                <div class="form-group-inner">
+                                <div class="row">
+                                  <div class="col-lg-3">
+                                    <input type="hidden" id="check_id" value="0">
+                                    <input type="hidden" id="check_model" value="User">
+
+                                    <label class="login2 pull-right pull-right-pro">Category</label>
+                                  </div>
+                                  <div class="col-lg-9">
+                                    <select class="form-control" id="category" name="category_id" required>
+                                      <option value="" disabled selected>Select  category</option>
+                                      <!-- <% 
+                                          if(cat && cat.length>0){
+                                              for(var k in cat){
+                                                    
+                                                       %>
+                                      <option value="<%= cat[k].id? cat[k].id : '' %>" <%
+                                                                if(cat[k].id==response[0].category_id){%> selected <%}%>>
+                                                                <%= cat[k].name? cat[k].name : '' %> </option> <% }
+                                                    }%> --> 
+                                      <% 
+                                          if(response[0].mainCategory.categories && response[0].mainCategory.categories.length>0){
+                                              for(var k in response[0].mainCategory.categories){
+                                                    
+                                                       %>
+                                      <option value="<%= response[0].mainCategory.categories[k].id %>" <%
+                                                                if(response[0].mainCategory.categories[k].id==response[0].category_id){%> selected <%}%>>
+                                                                <%= response[0].mainCategory.categories[k].name %> </option> <% }
+                                                    }%> </select> </div> </div> </div> 
+                                          <div class="form-group-inner">
+                                        <div class="row">
+                                          <div class="col-lg-3">
+                                            <input type="hidden" id="check_id" value="0">
+                                            <input type="hidden" id="check_model" value="User">
+
+                                            <label class="login2 pull-right pull-right-pro">Sub Category</label>
+                                          </div>
+                                          <div class="col-lg-9">
+                                            <select class="form-control" id="sub_cat" name="sub_category" required>
+                                              <option value="" disabled selected>Select subcategory</option>
+                                             <!--  <% 
+                                                                                      if(sub_cat && sub_cat.length>0){
+                                                                                          for(var l in sub_cat){
+                                                                                                          
+                                                                                                   %>
+                                              <option value="<%= sub_cat[l].id? sub_cat[l].id : '' %>" <%
+                                                                if(sub_cat[l].id==response[0].subcategory_id){%> selected <%}%>>
+                                                                <%= sub_cat[l].name? sub_cat[l].name : '' %> </option> <% }
+                                                                                                }%> --> 
+                                                                                                
+                                                                                                <% 
+                                                                                                if(response[0].productSubcategories && response[0].productSubcategories.length>0){
+                                                                                                    for(var k in response[0].productSubcategories){
+                                                                                                          
+                                                                                                             %>
+                                                                                            <option value="<%= response[0].productSubcategories[k].id %>" <%
+                                                                                                                      if(response[0].productSubcategories[k].id ==response[0].subcategory_id){%> selected <%}%>>
+                                                                                                                      <%= response[0].productSubcategories[k].name %> </option> <% }
+                                                                                                          }%> </select> </div>
+                                                </div> </div> 
+                                                <div class="form-group-inner">
+                                                <div class="row">
+                                                  <div class="col-lg-3">
+                                                    <input type="hidden" id="check_id" value="0">
+                                                    <input type="hidden" id="check_model" value="User">
+
+                                                    <label class="login2 pull-right pull-right-pro">Price</label>
+                                                  </div>
+                                                  <div class="col-lg-9">
+                                                    <input type="number" class="form-control" name="price"
+                                                      value="<%=response[0].price%>" onkeydown="javascript: return event.keyCode == 69 ? false : true" required />
+                                                  </div>
+                                                </div>
+                                          </div>
+                                          <div class="form-group-inner">
+                                            <div class="row">
+                                              <div class="col-lg-3">
+                                                <input type="hidden" id="check_id" value="0">
+                                                <input type="hidden" id="check_model" value="User">
+
+                                                <label class="login2 pull-right pull-right-pro">Description</label>
+                                              </div>
+                                              <div class="col-lg-9">
+                                                <input type="text" class="form-control" name="description"
+                                                  value="<%=response[0].description%>" placeholder="Description"  />
+                                              </div>
+                                            </div>
+                                      </div>
+                                      <div class="form-group-inner">
+                                        <div class="row">
+                                          <div class="col-lg-3">
+                                            <input type="hidden" id="check_id" value="0">
+                                            <input type="hidden" id="check_model" value="User">
+
+                                            <label class="login2 pull-right pull-right-pro">MLS</label>
+                                          </div>
+                                          <div class="col-lg-9">
+                                             <input type="number" min="1" max="9999" class="form-control" name="quantity"
+                                              value="<%=response[0].quantity%>" onkeydown="javascript: return event.keyCode == 69 ? false : true" placeholder = "eg. 400" required /> 
+                                              <!-- <input type="text" class="form-control" name="quantity"
+                                              value="<%=response[0].quantity%>" placeholder = "eg. 400 ml" required /> -->
+                                          </div>
+                                        </div>
+                                  </div>
+                                 <div class="form-group-inner">
+                                    <div class="row">
+                                      <div class="col-lg-3">
+                                        <input type="hidden" id="check_id" value="0">
+                                        <input type="hidden" id="check_model" value="User">
+            
+                                        <label class="login2 pull-right pull-right-pro">Units</label>
+                                      </div>
+                                      <div class="col-lg-9">
+                                        <select class="form-control" id="unit" name="unit" required>
+                                          <option value="" disabled selected>Select unit</option>
+                                            <option value="mls"  <%
+                                            if(response[0].unit == "mls"){%> selected <%}%>> mls</option>
+                                            <option value="gms"  <%
+                                            if(response[0].unit == "gms"){%> selected <%}%>> gms</option>
+                                            <option value="ounes" <%
+                                            if(response[0].unit == "ounces"){%> selected <%}%>> ounces</option>
+                                            <option value="kls" <%
+                                            if(response[0].unit == "kls"){%> selected <%}%>> kls</option>
+                                                                        
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+ 
+
+
+                                          <div class="form-group-inner">
+                                            <div class="row">
+                                              <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                                <label class="login2 pull-right pull-right-pro">Image</label>
+                                              </div>
+                                              <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="file-upload-inner ts-forms">
+                                                  <div class="input prepend-big-btn">
+                                                    <label class="icon-right" for="prepend-big-btn">
+                                                      <i class="fa fa-download"></i>
+                                                    </label>
+                                                    <div class="file-button">
+                                                      Browse
+                                                      <!-- <input type="file" name="image" onchange="readURL(this);"> -->
+                                                                                      <input type="file" name="image" id="image" onchange="readURL(this);" <%
+                                                        if(response[0].image ||response[0].image!='' ){ %>
+                                                      <%}else{%> required
+                                                      <% }%>/>
+                                                    </div>
+                                                    <input type="text" disabled id="prepend-big-btn" class="filess"
+                                                      placeholder="no file selected">
+                                                      
+                                                  </div>
+                                                </div>
+
+                                                <img class="margn" style="margin-top: 10px; margin-right: 652px; width:100px;height:100px;" id="blah" src="<%=response[0].image %>"  />
+
+                                               <!--  <img class="margn" style="margin-top: 10px; margin-right: 601px;"
+                                                  id="blah" src="#" alt="" /> -->
+
+
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="form-group-inner">
+                                            <div class="login-btn-inner">
+                                              <div class="row">
+                                                <div class="col-lg-3"></div>
+                                                <div class="col-lg-9">
+                                                  <div class="login-horizental cancel-wp pull-left">
+                                                    <button class="btn btn-white" type="reset"><a href="/product_view">
+                                                        Cancel</a></button>
+                                                    <button class="btn btn-sm btn-primary login-submit-cs"
+                                                      type="submit">Save Change</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Basic Form End-->
+
+
+<% include ../partials/footer.ejs %>
+<script type="text/javascript">
+  // ONCLICK ON CATEGORY ID //
+    $("#category").on('change', function () {
+      let cate_id = $(this).val();
+      let main_cat_id = $("#main_category").val();
+     // console.log(main_cat_id); 
+      $.ajax({
+        type: "post",
+        url: "/get_subcategory",
+        data: { id: cate_id , main_cat: main_cat_id },
+        cache: false,
+        success: function (s) {
+          let htmlappend = '<option value="" disabled selected>Select your Sub Category</option>';
+          if (s.length > 0) {
+            for (let i in s) {
+              htmlappend += '<option value="' + s[i].id + '">' + s[i].name + '</option>'
+            }
+          }
+          $("#sub_cat").html(htmlappend);
+        }
+      });
+    });
+     // ONCLICK ON MAIN CATEGORY ID//
+    $("#main_category").on('change', function () {
+      let venue_id = $(this).val();
+      //console.log(venue_id);
+      $.ajax({
+        type: "post",
+        url: "/get_categorys",
+        data: { id: venue_id },
+        cache: false,
+        success: function (s) {
+  //console.log(s);
+          let htmlappend = '<option value="" disabled selected>Select your Category</option>';
+          if (s.length > 0) {
+            for (let i in s) {
+              htmlappend += '<option value="' + s[i].id + '">' + s[i].name + '</option>'
+            }
+          }
+          $("#category").html(htmlappend);
+        }
+      });
+    });
+   
+   
+  </script>

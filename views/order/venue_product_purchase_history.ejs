@@ -1,0 +1,314 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+<style>
+img#margnn {
+    height: 200px;
+    width: 200px;
+    margin-top: 25px;
+}
+div#ordr_divv {
+    float: right;
+    margin-top: 40px;
+}
+b#usr {
+    float: left;
+    padding: 15px;
+}
+
+/* .venue_head {
+    text-align: center;
+    float: left;
+    width: 100%;
+    font-size: 17px;
+    text-transform: capitalize;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    margin: 0 0 0;
+    padding: 10px;
+    border-bottom: 0;
+} */
+</style>
+<div class="basic-form-area mg-b-15">
+  <div class="container-fluid">
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline12-list shadow-reset mg-t-30">
+          <div class="sparkline12-hd">
+            <div class="main-sparkline12-hd">
+              <h1>View Product Purchase History</h1>
+
+             
+            </div>
+          </div>
+          <div class="sparkline12-graph">
+            <div class="row">
+             
+
+                    <div class="row">
+                    
+                      <div class="col-lg-12">
+                          <div class="col-lg-8" >
+                              <span><b id = "usr" style="font-size: 16px; color:red">Product Purchase Detail :
+                                  <!-- <%= parseInt(0)+1%> --></b></span>
+                                        <br>
+                            </div>
+                        <div class="sparkline8-list shadow-reset" id ="usr_detail_">
+                          <div class="sparkline8-graph">
+                            <div class="static-table-list">
+                              <table class="table table-responsive">
+                                <thead>
+                                    
+                                  <tr>
+                                    <th style="text-align: center;" colspan="<%= response.length+2 %>" ><%= response[0].venue.name%></th>
+                                    
+                                  </tr>
+                                  <tr>
+                                    <th id="product" product_id="<%= response[0].product.id%>" ><%= response[0].product.name%> </th>
+                                    <% response.forEach((purchase)=>{%>
+
+                                        <th><a href=""  class="terminalPurchase" data-toggle="modal" data-target="#myModal" terminal_id="<%= purchase.terminal.id%>"><%= purchase.terminal.name%></a></th>
+                                    <%})%>  
+
+                                    <th>Total</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>Male</td>
+                                   
+                                    <% response.forEach((purchase)=>{
+                                      <!-- var totalMales = purchase.dataValues.users_gender[0].male; -->
+                                      %>
+
+                                      <td><%= purchase.dataValues.users_gender[0].male%></td>
+
+                                     
+                                  <% })%>
+                                  
+                                    <td><%var totalMales = response.reduce( function(tot, record) {
+                                      return tot + record.dataValues.users_gender[0].male;
+                                  },0); %><%= totalMales %></td>
+                                    
+                                  </tr>                           
+                                  <tr>
+                                    <td>Female</td>
+                                    <% response.forEach((purchase)=>{%>
+
+                                      <td><%= purchase.dataValues.users_gender[1].female%></td>
+                                  <%})%>
+                                  <td><%var totalFemales = response.reduce( function(tot, record) {
+                                    return tot + record.dataValues.users_gender[1].female;
+                                },0); %><%= totalFemales %></td>
+                                  </tr>  
+                                  <tr>
+
+                                    <td>Total</td>
+                                  
+                                    <% response.forEach((purchase)=>{
+                                      <!-- var totalMales = purchase.dataValues.users_gender[0].male; -->
+                                      %>
+
+                                      <td><%= purchase.dataValues.users_gender[0].male+purchase.dataValues.users_gender[1].female%></td>
+
+                                     
+                                  <% })%>
+                                   
+                                    <td><%= totalMales + totalFemales %></td>
+                              
+                                  </tr>                         
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                     </div>
+                        </div>
+                 <!-- </div>    
+              </div> -->
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+ 
+    <!-- Trigger the modal with a button -->
+    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+  
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Purchase Detail</h4>
+          </div>
+          <div class="modal-body">
+              <table class="table table-responsive" cellpadding="2">
+                  <thead>
+                      
+                    <tr>
+                      <th style="text-align: center;" colspan="6"><%= response[0].venue.name%></th>
+                      
+                    </tr>
+                    <tr>
+                      <th style="text-align: center;" colspan="6"><%= response[0].product.name%> - <span id="terminalName"></span></th>
+                      
+                    </tr>
+                    <tr>
+                        <%
+                        todayDate = new Date(); 
+                        var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]; %>
+                      <th style="text-align: center;" colspan="6">Date: <%= todayDate.getDate()+' '+months[todayDate.getMonth()]+' '+todayDate.getFullYear() %></th>
+                      
+                    </tr>
+                    <tr>
+                      <th style="text-align: center;" colspan="3"><span id="maleCustomerCount"></span> Male Customers</th>
+                      <th style="text-align: center;" colspan="3"><span id="femaleCustomerCount"></span> Female Customers</th>
+                      
+                    </tr>
+                    <tr>
+                      <th>Age </th>
+                      <th>Area/zip code </th>
+                      <th>time </th>
+                      <th>Age </th>
+                      <th>Area/zip code </th>
+                      <th>time </th>
+                 
+                    </tr>
+                  </thead>
+                  <tbody id="tableBody">
+
+                   
+                       
+                                               
+                    </tbody>
+                </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+  
+  $('.terminalPurchase').on('click',function(e){
+    e.preventDefault();
+    let terminal_id = $(this).attr('terminal_id');
+    let product_id = $('#product').attr('product_id');
+
+    $.ajax({
+                type:'get',
+                url:'/terminalProductPurchaseHistory?product_id='+product_id+'&terminal_id='+terminal_id,
+                data: {
+                    
+                },
+
+                success:function(data){
+                    
+                  // let arr = [];
+                  // arr.push(data);
+                   console.log(data);
+                   var html = "";
+                   $('#terminalName').text(data.terminalName);
+                   $('#maleCustomerCount').text(data['maleCustomers'].length);
+                   $('#femaleCustomerCount').text(data['femaleCustomers'].length);
+
+                   let max = Math.max(data['maleCustomers'].length,data['femaleCustomers'].length);
+
+                   for (let i = 0; i < max; i++) {
+                    html += "<tr>";
+                      if (i < data['maleCustomers'].length) {
+                        html += "<td>";
+                          html += data['maleCustomers'][i].dob;
+                        html += "</td>";
+                        html += "<td>";
+                          html += data['maleCustomers'][i].post_code;
+                        html += "</td>";
+                        html += "<td>";
+                          html += data['maleCustomers'][i].date;
+                        html += "</td>";
+                      } else {
+                        html += '<td></td>';
+                        html += '<td></td>';
+                        html += '<td></td>';
+                      }
+                      if (i < data['femaleCustomers'].length) {
+                        html += "<td>";
+                          html += data['femaleCustomers'][i].dob;
+                        html += "</td>";
+                        html += "<td>";
+                          html += data['femaleCustomers'][i].post_code;
+                        html += "</td>";
+                        html += "<td>";
+                          html += data['femaleCustomers'][i].date;
+                        html += "</td>";
+                      } else {
+                        html += '<td></td>';
+                        html += '<td></td>';
+                        html += '<td></td>';
+                      }
+                    html += "</tr>";
+                   }
+                   
+                  //  console.log(max, 'max');
+
+                  //  data.forEach(element => {
+                  //    html += "<tr>";
+
+                  //     if(element.userDetail.gender == 1){
+                       
+                  //       html += "<td>"+ element.userDetail.dob +"</td>";
+                  //       html += "<td>"+ element.userDetail.dob +"</td>";
+                  //       html += "<td>"+ element.userDetail.dob +"</td>";
+                  //     }
+                  //     else{
+                  //       html += "<td></td>";
+                  //       html += "<td></td>";
+                  //       html += "<td></td>";
+                       
+                  //     }
+
+                  //    if(element.userDetail.gender == 2){
+                       
+                  //      html += "<td>"+ element.userDetail.dob +"</td>";
+                  //      html += "<td>"+ element.userDetail.dob +"</td>";
+                  //      html += "<td>"+ element.userDetail.dob +"</td>";
+                  //    }
+                  //    else{
+                  //      html += "<td></td>";
+                  //      html += "<td></td>";
+                  //      html += "<td></td>";
+                       
+                  //    }
+                  //    html += "</tr>";
+                     
+                     
+                  //   });
+                    console.log(html);
+                    $('#tableBody').html(html);
+
+
+                 }
+            })
+  });
+  </script>
+
+<% include ../partials/footer.ejs %>

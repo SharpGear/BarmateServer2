@@ -1,0 +1,120 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/sidebar.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/flash.ejs %>
+<% //console.log(Items);  %>
+<br>
+
+
+
+<div class="admin-dashone-data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline8-list shadow-reset">
+                    <div class="sparkline8-hd">
+                        <div class="main-sparkline8-hd">
+                            <h1>Items</h1>
+                            <div class="sparkline8-outline-icon">
+                                <!-- <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span> -->
+                               <!--  <a href="/addItem" class="btn btn-white btn-xs" >+ Add Item</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sparkline8-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            <div id="toolbar">
+                                <select class="form-control">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select>
+                            </div>
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="ID">ID</th>
+                                        <th data-field="Name" data-editable="false">Name</th>
+                                        <th data-field="Description" data-editable="false">Description</th>
+                                        <th data-field="Price" data-editable="false">Price</th>
+                                        <th data-field="Store Name" data-editable="false">Store Name</th>
+                                        <th data-field="Category" data-editable="false">Category</th>
+                                        
+                                        <th data-field="Date" data-editable="false">Added Date</th>
+                                       <!--  <th data-field="Status">Status</th>
+                                        <th data-field="action">Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                    var x=0;
+
+                                    items.forEach((data, index) => {
+                                       
+                                      Item=data.dataValues;
+                                      Store=data.Store;
+                                      Category=data.Category;
+
+
+
+
+                                     
+                                      var formattedDate=dateTime(  Item.createdAt, 'fullDate');
+
+                                      x++;
+                                      %>
+                                    <tr>
+                                        <td></td>
+                                        <td><%= x %> </td>
+
+                                        <td class=""><%= Item.name %></td>
+                                        <td class=""><%= Item.description %></td>
+                                        <!-- <td class="datatable-ct"><span class="pie">1/6</span>
+                                        </td> -->
+                                        <td><%= Item.price %></td>
+                                        <td><a href="/viewstore?store_id=<%= Store.id;%>" ><%= Store.first_name %></a></td>
+                                        <td><%= Category.name %></td>
+                                        <td><%= formattedDate %></td>
+                                      <!--   <td>
+
+                                        <label class="switch">
+                                            <input id="<%= Item.id; %>" data-model="Item" type="checkbox" class="change_status"   <%= Item.status==1 ? 'checked' :''  %> >
+                                            <span class="slider round"></span>
+                                          </label>
+                                        </td>
+                                        <td>
+                                          <div class="btn-group project-list-action">
+                                          <a href="/editItem?Item_id=<%= Item.id;%>" class="btn btn-white btn-xs">Edit</a>
+
+
+                                          </div>
+
+                                                <div class="btn-group project-list-ad-rd">
+                                                  <a class="Danger danger-color btn btn-white btn-xs delete_row" data_id="<%=Item.id;  %>"   table_model="Item"  style="background: red;"data-toggle="modal" data-target="#DangerModalalert">Delete</a>
+
+                                                </div>
+
+                                        </td> -->
+                                    </tr>
+
+
+
+                                    <% }) %>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer.ejs %>

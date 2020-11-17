@@ -1,0 +1,356 @@
+
+    <!doctype html>
+    <html class="no-js" lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Barmate</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/x-icon" href="./img/logo/fav.png">
+        <!-- favicon
+		============================================ -->
+        <!--  <link rel="shortcut icon" type="image/x-icon" href="http://localhost:3009/img/logo/images.jpeg"> -->
+        <!-- Google Fonts
+		============================================ -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
+        <!-- Bootstrap CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/bootstrap.min.css">
+        <!-- Bootstrap CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/font-awesome.min.css">
+        <!-- adminpro icon CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/adminpro-custon-icon.css">
+        <!-- meanmenu icon CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/meanmenu.min.css">
+        <!-- mCustomScrollbar CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/jquery.mCustomScrollbar.min.css">
+        <!-- animate CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/animate.css">
+        <!-- summernote CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/summernote.css">
+
+        <!-- modals CSS
+    ============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/modals.css">
+        <!-- normalize CSS
+    ============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/normalize.css">
+        <!-- buttons CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/buttons.css">
+        <!-- forms CSS
+    ============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/form.css">
+        <link rel="stylesheet" href="http://localhost:3009/css/form/all-type-forms.css">
+        <!-- normalize CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/data-table/bootstrap-table.css">
+        <link rel="stylesheet" href="http://localhost:3009/css/data-table/bootstrap-editable.css">
+
+        <!-- dropzone CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/dropzone.css">
+        <link rel="stylesheet" href="http://localhost:3009/css/charts.css">
+        <!-- charts CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/c3.min.css">
+        <!-- notifications CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/Lobibox.min.css">
+        <link rel="stylesheet" href="http://localhost:3009/css/notifications.css">
+        <!-- style CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/style.css">
+        <!-- responsive CSS
+		============================================ -->
+        <link rel="stylesheet" href="http://localhost:3009/css/responsive.css">
+        <link rel="stylesheet" href="./css/custom_desh.css">
+        <!-- modernizr JS
+		============================================ -->
+        <script src="http://localhost:3009/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    </head>
+
+   <!--   background image for body 
+    style="border: none;background: url('http://3.93.160.69:9093/assets/website/images/log_back.png');background-size: cover;" width="100%" -->
+    <body class="materialdesign" >
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- Header top area start-->
+        <div class="wrapper-pro">
+<style media="screen">
+	#sidebar .sidebar-header {
+		padding: 0px !important;
+		background: #393939;
+	}
+</style>
+
+
+<div class="content-inner-all">
+    <div class="header-top-area">
+        <div class="fixed-header-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-1 col-md-6 col-sm-6 col-xs-12">
+                        <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <div class="admin-logo logo-wrap-pro">
+                            <a href="#"><img src="./img/logo/logo.png" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Header top area end-->
+
+<!--  Flash message setup -->
+
+
+<style>
+img#margnn {
+    height: 200px;
+    width: 200px;
+    margin-top: 25px;
+}
+div#ordr_divv {
+    float: right;
+    margin-top: 40px;
+}
+b#usr {
+    float: left;
+    padding: 15px;
+}
+td {
+    padding: 10px;
+    text-align: center;
+}
+</style>
+<div class="basic-form-area mg-b-15">
+  <div class="container-fluid">
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline12-list shadow-reset mg-t-30">
+          <div class="sparkline12-hd">
+            <div class="main-sparkline12-hd">
+              <h1> Order Receipt</h1>
+              <span><b style="font-size: 20px; color:black"><%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.name && (response[0].dataValues.venue.name!='' || response[0].dataValues.venue.dataValues.name!='null'))? response[0].dataValues.venue.dataValues.name:''%>
+                <!-- 1 --></b></span> <br>
+
+                <span><b style="font-size: 12px; color:black"> Phone : <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.phone && (response[0].dataValues.venue.phone!='' || response[0].dataValues.venue.dataValues.phone!='null'))? response[0].dataValues.venue.dataValues.phone:''%>
+                  <!-- 1 --></b></span> <br>
+
+                  <span><b style="font-size: 12px; color:black"> Fax: <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.fax && (response[0].dataValues.venue.fax!='' || response[0].dataValues.venue.dataValues.fax!='null'))? response[0].dataValues.venue.dataValues.fax:''%>
+                    <!-- 1 --></b></span> <br>
+
+                    <span><b style="font-size: 12px; color:black"> ABN: <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.abn && (response[0].dataValues.venue.abn!='' || response[0].dataValues.venue.dataValues.abn!='null'))? response[0].dataValues.venue.dataValues.abn:''%>
+                      <!-- 1 --></b></span> <br>
+
+              <span><b style="font-size: 12px; color:black">Receipt # : <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.order!='' || response[0].dataValues.order!='null') && response[0].dataValues.order.dataValues.receipt_no && (response[0].dataValues.order.receipt_no!='' || response[0].dataValues.order.dataValues.receipt_no!='null'))? response[0].dataValues.order.dataValues.receipt_no:''%>
+                <!-- 1 --></b></span> <br>
+             
+            </div>
+          </div>
+          <br> <br>
+          <div class="sparkline12-graph">
+            <div class="row">
+             
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                 
+                <div class="contact-client-single ct-client-b-mg-30 ct-client-b-mg-30-n shadow-reset">
+                   
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <span><b style="font-size: 16px; color:red">Order Details :
+                          <!-- 1 --></b></span>
+                          
+                                <br> <br> <br>
+                                <div class="project-details-dt">
+                                    <% if(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.image && (response[0].dataValues.venue.image!='' || response[0].dataValues.venue.dataValues.image!='null')){ %>
+                                      <img id="margnn" src="<%=response[0].dataValues.venue.dataValues.image %>" style="height:150px; width :150px" />
+                                      <% }else {%>
+                                      no image added yet
+      
+                                    <%  } %>
+                                  </div>
+                     
+                    </div>
+                    
+                    <div class="col-lg-8" id = "ordr_divv">
+    <p> <b>Venue:</b> &nbsp; &nbsp;
+     <!-- <p> -->
+        <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.name && (response[0].dataValues.venue.name!='' || response[0].dataValues.venue.dataValues.name!='null'))? response[0].dataValues.venue.dataValues.name:''%>
+   <!--</p> -->   
+     </p>                   
+    <p><b>Terminal:</b> &nbsp; &nbsp;
+                     <!--  <p> --> <i class="fa fa-map-marker"></i>
+                        <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.terminal!='' || response[0].dataValues.terminal!='null') && response[0].dataValues.terminal.dataValues.name && (response[0].dataValues.terminal.name!='' || response[0].dataValues.terminal.dataValues.name!='null'))? response[0].dataValues.terminal.dataValues.name:''%>
+                      <!-- </p> -->
+                    </p>
+                  <p>  <b>Username:</b> &nbsp; &nbsp;
+                       <!-- <p> -->
+                          <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.userDetail!='' || response[0].dataValues.userDetail!='null') && response[0].dataValues.userDetail.dataValues.name && (response[0].dataValues.userDetail.name!='' || response[0].dataValues.userDetail.dataValues.name!='null'))? response[0].dataValues.userDetail.dataValues.name:''%>
+                        <!-- </p> --> 
+                      </p>
+
+                    <p> <b>TBM Service:</b> &nbsp; &nbsp;
+                                            <!-- <p> -->
+                                                $ <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.order!='' || response[0].dataValues.order!='null') && response[0].dataValues.order.dataValues.tbm_service && (response[0].dataValues.order.tbm_service!='' || response[0].dataValues.order.dataValues.tbm_service!='null'))? response[0].dataValues.order.dataValues.tbm_service:''%>
+                                               <!-- </p> --> 
+                                              </p>
+                                            <p> <b>Total:</b> &nbsp; &nbsp;
+                                            <!-- <p> -->
+                                                $ <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.order!='' || response[0].dataValues.order!='null') && response[0].dataValues.order.dataValues.total && (response[0].dataValues.order.total!='' || response[0].dataValues.order.dataValues.total!='null'))? response[0].dataValues.order.dataValues.total:''%>
+                                              <!-- </p>  -->
+                                            </p>
+                                          <p> <b>Order Status:</b> &nbsp; &nbsp;
+                                            <!-- <p> -->
+                                              <% if(response[0].dataValues.order.dataValues.status=='2'){%><span
+                                                class="label label-info">Making</span>
+                                            <%}else if(response[0].dataValues.order.dataValues.status=='1'){%><span
+                                                class="label label-warning">Pending</span>
+
+                                            <%}else if(response[0].dataValues.order.dataValues.status=='5'){%><span class="label label-danger">Cancelled</span>
+                                            <%} else {%> <span class="label label-success">Collected</span> <%}%>
+                                            <!--  </p> --> 
+                                            </p> 
+                                          <p>  <b>Date:</b> &nbsp; &nbsp;
+                                            <!-- <p> -->
+                                                <%=(new Date(response[0].dataValues.order.dataValues.createdAt * 1000)).toGMTString(); %>
+                                             <!-- </p> --> </p>
+                                           
+                    </div>
+                 
+                    <div class="col-lg-12">
+                        <!-- <span><b style="font-size: 16px; color:red">Product Details :
+                            </b></span> -->
+                      <div class="sparkline8-list shadow-reset">
+
+                        <div class="sparkline8-graph">
+                          <div class="static-table-list">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Product</th>
+                                  <th>Quantity</th>
+                                  <th>Price</th>
+                                  
+                                </tr>
+                              </thead>
+                              <tbody>
+                                  <% if(response && response!=''){
+                                    for(let i in response){
+                                %>
+                               
+                                <tr>
+                                    <td>
+                                        <%=(response[i] && (response[i]!='' || response[i]!='null') && (response[i].dataValues.product!='' || response[i].dataValues.product!='null') && response[i].dataValues.product.dataValues.name && (response[i].dataValues.product.name!='' || response[i].dataValues.product.dataValues.name!='null'))? response[i].dataValues.product.dataValues.name:''%> ( <%=(response[i] && (response[i]!='' || response[i]!='null') && (response[i].dataValues.product!='' || response[i].dataValues.product!='null') && response[i].dataValues.product.dataValues.quantity && (response[i].dataValues.product.quantity!='' || response[i].dataValues.product.dataValues.quantity!='null'))? response[i].dataValues.product.dataValues.quantity:1%> )
+                                      </td>
+                                      <td>
+
+                                          <%=response[i].dataValues.quantity%>
+                                        </td>
+                                   <td>
+
+                                   $ <%=response[i].dataValues.price%>
+                                  </td>
+                                 
+                                 
+                                  
+                                 
+
+                                                                </tr>
+                                                                <%}
+                                                              }%>
+                               
+                                                                
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
+              </div>
+
+
+
+
+                 <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+            <div class="contact-client-single ct-client-b-mg-30 ct-client-b-mg-30-n shadow-reset"> -->
+                    <div class="row">
+                     <!--  <div class="col-lg-4">
+                        <span><b style="font-size: 16px; color:red">User Detail :
+                            1 </b></span>
+                                  <br>
+                      </div> -->
+                      <div class="col-lg-8">
+                          <div class="col-lg-4" >
+                              <span><b id = "usr" style="font-size: 16px; color:red">Venue Detail :
+                                  <!-- 1 --></b></span>
+                                        <br>
+                            </div>
+                        <div class="sparkline8-list shadow-reset" id ="usr_detail_">
+                          <div class="sparkline8-graph">
+                            <div class="static-table-list">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Name </th>
+                                    <th>Email</th>
+                                    <th>Address</th> 
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                      <td>
+                                          <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.name && (response[0].dataValues.venue.name!='' || response[0].dataValues.venue.dataValues.name!='null'))? response[0].dataValues.venue.dataValues.name:''%>
+                                        </td>
+                                        <td>
+                                            <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.email && (response[0].dataValues.venue.email!='' || response[0].dataValues.venue.dataValues.email!='null'))? response[0].dataValues.venue.dataValues.email:''%>
+                                          </td>
+                                          <td>
+                                              <%=(response[0] && (response[0]!='' || response[0]!='null') && (response[0].dataValues.venue!='' || response[0].dataValues.venue!='null') && response[0].dataValues.venue.dataValues.address && (response[0].dataValues.venue.address!='' || response[0].dataValues.venue.dataValues.address!='null'))? response[0].dataValues.venue.dataValues.address:''%>
+                                            </td>
+                                                                  </tr>                           
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                     </div>
+                        </div>
+                 <!-- </div>    
+              </div> -->
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+
+</html>

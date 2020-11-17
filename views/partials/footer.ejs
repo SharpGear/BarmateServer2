@@ -1,0 +1,444 @@
+<%
+const web_root = "https://admin.thebarmate.com/";
+<!-- const web_root = "/"; -->
+
+%>
+<div id="DangerModalalert" class="modal modal-adminpro-general FullColor-popup-DangerModal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-close-area modal-close-df">
+        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+      </div>
+      <div class="modal-body">
+        <i class="fa fa-times" aria-hidden="true" style="font-size: 50px;color: #ec5746;"></i>
+        <h2>Delete !</h2>
+        <p>Are you sure you want to delete this ? </p>
+        <input type="hidden" id="table_id" value="">
+        <input type="hidden" id="table_name" value="">
+      </div>
+      <div class="modal-footer">
+        <a data-dismiss="modal" href="#">Cancel</a>
+        <a href="#" id="delete_table_row">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="newDangerModalalert" class="modal modal-adminpro-general FullColor-popup-DangerModal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-close-area modal-close-df">
+        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+      </div>
+      <div class="modal-body">
+        <i class="fa fa-times" aria-hidden="true" style="font-size: 50px;color: #ec5746;"></i>
+        <h2>Delete !</h2>
+        <p>Are you sure you want to delete this ? </p>
+        <input type="hidden" id="table_id" value="">
+        <input type="hidden" id="table_name" value="">
+      </div>
+      <div class="modal-footer">
+        <a data-dismiss="modal" href="#">Cancel</a>
+        <a href="#" id="new_delete_table_row">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+<div class="footer-copyright-area">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="footer-copy-right">
+          <p>Copyright &#169;
+            <%= (new Date()).getFullYear() %> <a href="https://www.cqlsys.com/">Cqlsys Technology</a> All rights
+            reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer End-->
+<!-- jquery
+  ============================================ -->
+<script src="<%= web_root  %>js/vendor/jquery-1.11.3.min.js"></script>
+<!-- bootstrap JS
+  ============================================ -->
+<script src="<%= web_root  %>js/bootstrap.min.js"></script>
+<!-- meanmenu JS
+  ============================================ -->
+<script src="<%= web_root  %>js/jquery.meanmenu.js"></script>
+<!-- mCustomScrollbar JS
+  ============================================ -->
+<script src="<%= web_root  %>js/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- sticky JS
+  ============================================ -->
+<script src="<%= web_root  %>js/jquery.sticky.js"></script>
+<!-- scrollUp JS
+  ============================================ -->
+<script src="<%= web_root  %>js/jquery.scrollUp.min.js"></script>
+
+<!-- notification JS
+  ============================================ -->
+<script src="<%= web_root  %>js/Lobibox.js"></script>
+<script src="<%= web_root  %>js/notification-active.js"></script>
+<!-- icheck JS   ============================================ -->
+<!-- <script src="<%= web_root  %>js/icheck/icheck.min.js"></script>
+   <script src="<%= web_root  %>js/icheck/icheck-active.js"></script> -->
+<!-- main JS
+  ============================================ -->
+<script src="<%= web_root  %>js/modal-active.js"></script>
+<script src="<%= web_root  %>js/main.js"></script>
+<!-- form validate JS
+  ============================================ -->
+<script src="<%= web_root  %>js/jquery.form.min.js"></script>
+<script src="<%= web_root  %>js/jquery.validate.min.js"></script>
+<script src="<%= web_root  %>js/form-active.js"></script>
+<!-- data table JS
+  ============================================ -->
+  <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+<script src="<%= web_root  %>js/data-table/tableExport.js"></script>
+<script src="<%= web_root  %>js/data-table/data-table-active.js"></script>
+<script src="<%= web_root  %>js/data-table/bootstrap-table-editable.js"></script>
+<script src="<%= web_root  %>js/data-table/bootstrap-editable.js"></script>
+<script src="<%= web_root  %>js/data-table/bootstrap-table-resizable.js"></script>
+<script src="<%= web_root  %>js/data-table/colResizable-1.5.source.js"></script>
+<script src="<%= web_root  %>js/data-table/bootstrap-table-export.js"></script>
+<script src="<%= web_root  %>js/flot/Chart.min.js"></script>
+<script src="<%= web_root  %>js/charts/bar-chart.js"></script>
+<script src="<%= web_root  %>js/flot/dashtwo-flot-active.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtYMExtdWonZI-S9IIW9nyHUd-mZqKL4g&libraries=places&callback=initAutocomplete"
+  async defer></script>
+
+<script>
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      // console.log(input.files[0].name);
+      // console.log(reader);
+      reader.onload = function (e) {
+        $('#blah')
+          .attr('src', e.target.result)
+          .width(150)
+          .height(150);
+      };
+      $('.filess').attr('placeholder', input.files[0].name);
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $(document).on('click', '.delete_row', function () {
+
+    var model = $(this).attr('table_model');
+    var id = $(this).attr('data_id');
+
+    console.log($(this).attr('table_model'));
+    console.log($(this).attr('data_id'));
+
+    $("#table_id").val(id);
+    $("#table_name").val(model);
+  });
+
+  $(document).on('click', '#delete_table_row', function () {
+    var model = $("#table_name").val();;
+    var id = $("#table_id").val();;
+
+    $.ajax({
+      type: "post",
+      url: "/delete",
+      data: { id: id, model: model },
+      cache: false,
+      success: function (s) {
+        $("#DangerModalalert").toggle();
+        swal("Deleted successfully!.")
+          .then((value) => {
+            window.location.reload();
+
+          });
+      }
+    });
+  });
+
+  $(document).on('click', '.new_delete_row', function () {
+
+var model = $(this).attr('table_model');
+var id = $(this).attr('data_id');
+
+console.log($(this).attr('table_model'));
+console.log($(this).attr('data_id'));
+
+$("#table_id").val(id);
+$("#table_name").val(model);
+});
+
+$(document).on('click', '#new_delete_table_row', function () {
+var model = $("#table_name").val();;
+var id = $("#table_id").val();;
+
+$.ajax({
+  type: "post",
+  url: "/new_delete",
+  data: { id: id, model: model },
+  cache: false,
+  success: function (s) {
+    $("#newDangerModalalert").toggle();
+    swal("Deleted successfully!.")
+      .then((value) => {
+        window.location.reload();
+
+      });
+  }
+});
+});
+
+  $(document).on('change', '.change_status', function () {
+
+    var id = $(this).attr('id');
+    var model = $(this).attr('data-model');
+    var column = $(this).attr('column');
+    _this = $(this);
+    //alert(column);
+    if ($(this).is(":checked")) {
+      status = 1;
+    } else {
+      status = 0;
+    }
+
+    $.ajax({
+      type: "post",
+      data: { id: id, status: status, model: model, status: status },
+      url: "/update_row_status",
+      success: function (data) {
+
+
+      }
+
+    });
+
+
+
+  });
+
+
+  // This example displays an address form, using the autocomplete feature
+  // of the Google Places API to help users fill in the information.
+
+  // This example requires the Places library. Include the libraries=places
+  // parameter when you first load the API. For example:
+  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+  var placeSearch, autocomplete;
+  var componentForm = {
+    // street_number: 'short_name',
+    // route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+
+  function initAutocomplete() {
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    autocomplete = new google.maps.places.Autocomplete(
+       /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      { types: ['geocode'] });
+
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocomplete.addListener('place_changed', fillInAddress);
+  }
+
+  function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+
+    for (var component in componentForm) {
+      document.getElementById(component).value = '';
+      document.getElementById(component).disabled = false;
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+      var addressType = place.address_components[i].types[0];
+      if (componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+      }
+    }
+    $("#latitude").val(place.geometry.location.lat());
+    $("#longitude").val(place.geometry.location.lng());
+  }
+
+  // Bias the autocomplete object to the user's geographical location,
+  // as supplied by the browser's 'navigator.geolocation' object.
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  }
+
+</script>
+<script>
+  $(document).ready(function () {
+    $('.start,.end').datepicker({
+      autoHide: true,
+      zIndex: 2048,
+      format: 'yyyy-mm-dd',
+      // endDate: new Date()
+    });
+
+    setTimeout(() => {
+      $("#msg").fadeOut('slow');
+    }, 3000);
+    $('input').on('keypress', function (e) {
+
+      if (e.which == 32)
+        return false;
+    });
+    $('.date').datepicker({
+      autoHide: true,
+      zIndex: 2048,
+      format: 'dd/mm/yyyy',
+      endDate: new Date()
+    });
+    /*    $(document).ready(() => {
+         $(".start").on('click', () => {
+           $('.start').datepicker({
+             autoHide: true,
+             zIndex: 2048,
+             format: 'dd/mm/yyyy',
+             // endDate: new Date()
+           });
+         });
+         $(".end").on('click', () => {
+           $('.end').datepicker({
+             autoHide: true,
+             zIndex: 2048,
+             format: 'dd/mm/yyyy',
+             // endDate: new Date()
+           });
+         });
+       }); */
+    //    $('#table').DataTable({
+    //   responsive: true
+    // });
+    /// --------check email------------------//
+    $('.user_email').on('keyup', function () {
+
+$('.user_email_chk').hide();
+var value = $(this).val();
+
+if (value == '') {
+  $('.user_email_chk').hide();
+  $(".ad_button").attr("disabled", false);
+
+}
+else {
+  $.ajax({
+    type: "POST",
+    url: "/check_user_email",
+    data: { email: value },
+    success: function (response) {
+      if (response == '1') {
+        $('.user_email_chk').show();
+        $(".ad_button").attr("disabled", true);
+
+      } else {
+        $('.user_email_chk').hide();
+        $(".ad_button").attr("disabled", false);
+
+      }
+
+    }, error(error) {
+      console.error(error);
+    }
+
+  });
+}
+
+});
+////////------------check sub category name ------------//
+$('.sub_cat_name').on('keyup', function () {
+
+$('.sub_cat_name_chk').hide();
+let sub_cat_value = $(this).val();
+let cat_id = $('#category').val();
+//console.log(cat_id);
+
+if (sub_cat_value == '') {
+  $('.sub_cat_name_chk').hide();
+  $(".sub_cat_button").attr("disabled", false);
+
+}
+else {
+  $.ajax({
+    type: "POST",
+    url: "/check_sub_cat_name",
+    data: { name: sub_cat_value, category_id:cat_id },
+    success: function (response) {
+      if (response == '1') {
+        $('.sub_cat_name_chk').show();
+        $(".sub_cat_button").attr("disabled", true);
+
+      } else {
+        $('.sub_cat_name_chk').hide();
+        $(".sub_cat_button").attr("disabled", false);
+
+      }
+
+    }, error(error) {
+      console.error(error);
+    }
+
+  });
+}
+
+});
+  });
+  // if (this.enableKeyboardNavigation) {
+  $('body').on('keyup','input',function(e) {   var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+    e.preventDefault(); 
+  var _this  = $(this);
+    switch(key) {
+    case 32: // space
+   var h  =   _this.val();
+  //  console.log(h);
+    $(this).val(h+" ");
+   //  gallery.next();
+     e.preventDefault();     break;
+   }
+   });
+  // }
+
+</script>
+
+
+
+</body>
+
+</html>
